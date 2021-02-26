@@ -16,27 +16,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Device/calibrator.cpp \
-    Device/comconnection.cpp \
+    Device/cominterface.cpp \
     Device/device.cpp \
-    Device/h_4_7.cpp \
-    Device/hp_34420a.cpp \
-    Device/iconnection.cpp \
-    Device/tcpconnection.cpp \
-    Device/voltmeter.cpp \
+    Device/h4_7.cpp \
+    Device/hp34420.cpp \
+    Device/idevice.cpp \
+    Device/interfaceconnect.cpp \
     controller.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
-    Device/calibrator.h \
-    Device/comconnection.h \
+    Device/EnumModelsDevice.h \
+    Device/cominterface.h \
     Device/device.h \
-    Device/h_4_7.h \
-    Device/hp_34420a.h \
-    Device/iconnection.h \
-    Device/tcpconnection.h \
-    Device/voltmeter.h \
+    Device/h4_7.h \
+    Device/hp34420.h \
+    Device/idevice.h \
+    Device/interfaceconnect.h \
     controller.h \
     mainwindow.h
 

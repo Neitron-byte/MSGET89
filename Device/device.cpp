@@ -1,6 +1,19 @@
-#include "Device/device.h"
+#include "device.h"
 
-IDevice::IDevice(QObject *parent) : QObject(parent)
+Device::Device(QObject *parent) : QObject(parent)
 {
+
+}
+
+void Device::creatInterface(const typeConnection & type)
+{
+
+    switch (type) {
+    case typeConnection::COM:
+        m_interfaceConnected = new ComInterface();
+        break;
+    default:
+        break;
+    }
 
 }

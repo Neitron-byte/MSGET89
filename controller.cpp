@@ -1,59 +1,44 @@
 #include "controller.h"
 
+Device *Controller::createDevice(const modelsDevice& model)
+{
+    switch (model) {
+    case modelsDevice::HP34420:
+        return new HP34420();
+        break;
+    case modelsDevice::H4_7:
+        return new H4_7();
+        break;
+    default:
+        break;
+    }
+
+}
+
 Controller::Controller(QObject *parent) : QObject(parent)
 {
 
 }
 
-Calibrator *Controller::createCalibrator(const modelsCalibrator& calibrator) const
+void Controller::createCalibrator(const modelsDevice& calibrator)
 {
-    switch (calibrator) {
-    case modelsCalibrator::H4_7:
-        return new H_4_7();
-        break;
-    default:
-        break;
-    }
+        m_calibrator = createDevice(calibrator);
 
  }
 
-Voltmeter *Controller::createVoltmeter(const modelsVoltmeter& voltmeter) const
+void Controller::createVoltmeter(const modelsDevice& voltmeter)
 {
-    switch (voltmeter) {
-    case modelsVoltmeter::HP34420A:
-        return new HP_34420A();
-        break;
 
-    default:
-        break;
-    }
-
+        m_voltmeter = createDevice(voltmeter);
 }
 
 
 void Controller::createInterfaceCalibrator(const typeConnection & type)
 {
-    switch (type) {
-    case typeConnection::COM:
-        m_calibrator->m_connection = new comConnection();
-        break;
-
-    default:
-        break;
-    }
-
+    m_calibrator->creatInterface(type);
 }
 
 void Controller::createInterfaceVoltmeter(const typeConnection & type)
 {
-
-    switch (type) {
-    case typeConnection::COM:
-        m_voltmeter->m_connection = new comConnection();
-        break;
-
-    default:
-        break;
-    }
-
+    m_voltmeter->creatInterface(type);
 }
