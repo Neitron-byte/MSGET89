@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file>application-exit.png</file>
+        <file>clear.png</file>
+        <file>connect.png</file>
+        <file>Device.png</file>
+        <file>disconnect.png</file>
+        <file>settings.png</file>
+    </qresource>
+    <qresource lang="ru" prefix="/Translation">
+        <file>msget89_ru.qm</file>
+    </qresource>
+</RCC>
