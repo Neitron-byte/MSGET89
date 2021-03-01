@@ -18,18 +18,18 @@ class Controller : public QObject
     Device* m_voltmeter = nullptr;
 
     //фабричный метод создания приборов
-    Device* createDevice(const modelsDevice&);
+    Device* createDevice(const enumsdevice::models&);
 
 public:
     explicit Controller(QObject *parent = nullptr);
 
     //____создание приборов___________//
-    void createCalibrator(const modelsDevice&);
-    void createVoltmeter(const modelsDevice&);
+    void createCalibrator(const enumsdevice::models&);
+    void createVoltmeter(const enumsdevice::models&);
 
     //____создание интерфеса взаимодействия______//
-    void createInterfaceCalibrator(const typeConnection&);
-    void createInterfaceVoltmeter(const typeConnection&);
+    void createInterfaceCalibrator(const enumsdevice::typeConnection& );
+    void createInterfaceVoltmeter(const enumsdevice::typeConnection&);
 
 
 signals:

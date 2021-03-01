@@ -16,7 +16,7 @@ class DeviceDialog : public QDialog
 {
     Q_OBJECT
 
-    void initModel();
+    void addModel();
 
 public:
     explicit DeviceDialog(QWidget *parent = nullptr);
