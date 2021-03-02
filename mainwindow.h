@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <devicedialog.h>
 #include <QDebug>
+#include <controller.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,5 +32,8 @@ private:
 
     //диалоговое окно настройки оборудования
     DeviceDialog* m_settingsDevices;
+
+    // Контроллер управления приборами
+    Controller* m_controller = nullptr;
 };
 #endif // MAINWINDOW_H

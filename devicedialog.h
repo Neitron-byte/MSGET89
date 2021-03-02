@@ -16,7 +16,10 @@ class DeviceDialog : public QDialog
 {
     Q_OBJECT
 
-    void addModel();
+    //загрузка моделей
+    void addModel() const;
+    //загрузка типа подключения
+    void addTypeConnected() const;
 
 public:
     explicit DeviceDialog(QWidget *parent = nullptr);
@@ -25,11 +28,22 @@ public:
 private slots:
     void on_pushButton_settings_cal_clicked();
 
+    void on_comboBox_device_cal_currentIndexChanged(int index);
+
+    void on_comboBox_Device_Vol_currentIndexChanged(int index);
+
+    void on_comboBox_type_connect_cal_currentIndexChanged(int index);
+
+    void on_comboBox_Type_conVol_currentIndexChanged(int index);
+
 private:
     Ui::DeviceDialog *ui;
-
-
-
+    //модели
+    enumModelDevice::models m_calibrator;
+    enumModelDevice::models m_voltmeter;
+    //тип подключения
+    enumTypeConnection::type m_typeConnectCalibrator;
+    enumTypeConnection::type m_typeConnectVoltmeter;
 
 };
 

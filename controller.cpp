@@ -1,17 +1,19 @@
 #include "controller.h"
 
-Device *Controller::createDevice(const enumsdevice::models& model)
+Device *Controller::createDevice(const enumModelDevice::models& model)
 {
     switch (model) {
-    case enumsdevice::models::HP34420:
+    case enumModelDevice::HP34420:
         return new HP34420();
         break;
-    case enumsdevice::models::H4_7:
+    case enumModelDevice::H4_7:
         return new H4_7();
         break;
     default:
+        return nullptr;
         break;
     }
+
 
 }
 
@@ -20,25 +22,25 @@ Controller::Controller(QObject *parent) : QObject(parent)
 
 }
 
-void Controller::createCalibrator(const enumsdevice::models& calibrator)
+void Controller::createCalibrator(const enumModelDevice::models& calibrator)
 {
         m_calibrator = createDevice(calibrator);
 
  }
 
-void Controller::createVoltmeter(const enumsdevice::models& voltmeter)
+void Controller::createVoltmeter(const enumModelDevice::models& voltmeter)
 {
 
         m_voltmeter = createDevice(voltmeter);
 }
 
 
-void Controller::createInterfaceCalibrator(const enumsdevice::typeConnection& type)
+void Controller::createInterfaceCalibrator(const enumTypeConnection::type& type)
 {
     m_calibrator->creatInterface(type);
 }
 
-void Controller::createInterfaceVoltmeter(const enumsdevice::typeConnection& type)
+void Controller::createInterfaceVoltmeter(const enumTypeConnection::type& type)
 {
     m_voltmeter->creatInterface(type);
 }

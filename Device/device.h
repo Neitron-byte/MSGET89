@@ -12,7 +12,7 @@ class Device : public QObject
     Q_OBJECT
 public:
     explicit Device(QObject *parent = nullptr);
-    void creatInterface(const enumsdevice::typeConnection &);
+    void creatInterface(const enumTypeConnection::type&);
 signals:
 
 protected:

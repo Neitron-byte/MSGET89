@@ -5,11 +5,10 @@ Device::Device(QObject *parent) : QObject(parent)
 
 }
 
-void Device::creatInterface(const enumsdevice::typeConnection & type)
+void Device::creatInterface(const enumTypeConnection::type& type)
 {
-
     switch (type) {
-    case enumsdevice::typeConnection::COM:
+    case enumTypeConnection::COM:
         m_interfaceConnected = new ComInterface();
         break;
     default:

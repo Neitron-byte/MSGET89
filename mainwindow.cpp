@@ -5,7 +5,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow),
-      m_settingsDevices(new DeviceDialog)
+      m_settingsDevices(new DeviceDialog),
+      m_controller(new Controller)
 
 {
     ui->setupUi(this);
@@ -20,8 +21,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     //m_status1->setText("Create status1");
     //m_status2->setText("Create status2");
-
-
 
 }
 
