@@ -2,7 +2,9 @@
 #define COMINTERFACE_H
 
 #include "Device/interfaceconnect.h"
-#include<QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPort>
+#include <QDebug>
+#include "devicedialog.h"
 
 
 //___________________Класс наследник, реализующий интерфейс через COM-порт___________________//
@@ -14,26 +16,30 @@ public:
     struct Settings {
         QString name;
         qint32 baudRate;
-        QString stringBaudRate;
         QSerialPort::DataBits dataBits;
-        QString stringDataBits;
         QSerialPort::Parity parity;
-        QString stringParity;
         QSerialPort::StopBits stopBits;
-        QString stringStopBits;
         QSerialPort::FlowControl flowControl;
-        QString stringFlowControl;
-        bool localEchoEnabled;
-    };
+      };
 
 public:
      ComInterface();
+     ~ComInterface();
      void open() override;
      void close() override;
      void write() override;
      void read() override;
 
+public slots:
+
+     void setSettings(const Settings&&);
+
 private:
      Settings m_currentSettings;
+
+     friend class DeviceDialog;
 };
+
+
+
 #endif // COMINTERFACE_H

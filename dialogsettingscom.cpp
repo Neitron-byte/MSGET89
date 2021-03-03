@@ -33,6 +33,15 @@ void DialogSettingsCom::fillPortsParameters()
     ui->flowControlBox->addItem(tr("XON/XOFF"), QSerialPort::SoftwareControl);
 }
 
+void DialogSettingsCom::fillPortsInfo()
+{
+    ui->comBox ->clear();
+    const auto infos = QSerialPortInfo::availablePorts();
+    for (const QSerialPortInfo &info : infos) {
+        ui->comBox->addItem(info.portName());
+    }
+}
+
 DialogSettingsCom::DialogSettingsCom(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogSettingsCom)
@@ -40,6 +49,7 @@ DialogSettingsCom::DialogSettingsCom(QWidget *parent) :
     ui->setupUi(this);
     qDebug() << "Constructor settings COM";
     this->fillPortsParameters();
+    this->fillPortsInfo();
 }
 
 DialogSettingsCom::~DialogSettingsCom()
@@ -47,5 +57,42 @@ DialogSettingsCom::~DialogSettingsCom()
     delete ui;
     qDebug() << "Distructor settings COM";
 }
+
+QString DialogSettingsCom::getNameCom()
+{
+    return ui->comBox->currentText();
+
+}
+
+QSerialPort::BaudRate DialogSettingsCom::getBaudRate()
+{
+    return static_cast<QSerialPort::BaudRate>(
+                ui->baudRateBox->itemData(ui->baudRateBox->currentIndex()).toInt());
+}
+
+QSerialPort::DataBits DialogSettingsCom::getDataBits()
+{
+    return static_cast<QSerialPort::DataBits>(
+                ui->dataBitsBox->itemData(ui->dataBitsBox->currentIndex()).toInt());
+}
+
+QSerialPort::StopBits DialogSettingsCom::getStopBits()
+{
+    return static_cast<QSerialPort::StopBits>(
+                ui->stopBitsBox->itemData(ui->stopBitsBox->currentIndex()).toInt());
+}
+
+QSerialPort::Parity DialogSettingsCom::getParity()
+{
+    return static_cast<QSerialPort::Parity>(
+                ui->parityBox->itemData(ui->parityBox->currentIndex()).toInt());
+}
+
+QSerialPort::FlowControl DialogSettingsCom::getFlow()
+{
+    return static_cast<QSerialPort::FlowControl>(
+                ui->flowControlBox->itemData(ui->flowControlBox->currentIndex()).toInt());
+}
+
 
 

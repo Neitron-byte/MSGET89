@@ -31,7 +31,7 @@ private:
     QLabel *m_status2 = nullptr;//статус подключения QSatusBar
 
     //диалоговое окно настройки оборудования
-    DeviceDialog* m_settingsDevices;
+    DeviceDialog* m_settingsDevices = nullptr;
 
     // Контроллер управления приборами
     Controller* m_controller = nullptr;

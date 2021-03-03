@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QDebug>
 #include <QSerialPort>
+#include <QSerialPortInfo>
 
 namespace Ui {
 class DialogSettingsCom;
@@ -16,6 +17,7 @@ class DialogSettingsCom : public QDialog
     Q_OBJECT
 
     void fillPortsParameters();
+    void fillPortsInfo();
 
 public:
     explicit DialogSettingsCom(QWidget *parent = nullptr);
@@ -23,6 +25,14 @@ public:
 
 private:
     Ui::DialogSettingsCom *ui;
+
+public:
+    QString getNameCom();
+    QSerialPort::BaudRate getBaudRate();
+    QSerialPort::DataBits getDataBits();
+    QSerialPort::StopBits getStopBits();
+    QSerialPort::Parity getParity();
+    QSerialPort::FlowControl getFlow();
 
 };
 

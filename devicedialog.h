@@ -5,12 +5,15 @@
 #include <dialogsettingscom.h>
 #include <QDebug>
 #include "Device/EnumModelsDevice.h"
+#include "Device/cominterface.h"
 
 namespace Ui {
 class DeviceDialog;
 }
 
 //_____________Диалоговое окно настроек подключения к приборам______________//
+
+
 
 class DeviceDialog : public QDialog
 {
@@ -36,6 +39,18 @@ private slots:
 
     void on_comboBox_Type_conVol_currentIndexChanged(int index);
 
+signals:
+    //создание приборов
+    void createCalibrator(const enumModelDevice::models&);
+    void createVoltmeter(const enumModelDevice::models&);
+
+    //создание интерфейса
+    void createConnectionCalibrator(const enumTypeConnection::type&);
+    void createConnectionVoltmeter(const enumTypeConnection::type&);
+
+    //настройка СOM
+    void setSettingsCom(ComInterface::Settings);
+
 private:
     Ui::DeviceDialog *ui;
     //модели
@@ -44,6 +59,8 @@ private:
     //тип подключения
     enumTypeConnection::type m_typeConnectCalibrator;
     enumTypeConnection::type m_typeConnectVoltmeter;
+
+
 
 };
 

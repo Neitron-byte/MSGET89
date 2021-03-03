@@ -2,7 +2,12 @@
 
 H4_7::H4_7()
 {
+    qDebug()<<"Constructor H4_7";
+}
 
+H4_7::~H4_7()
+{
+    qDebug()<<"Distructor H4_7";
 }
 
 void H4_7::connecting()
