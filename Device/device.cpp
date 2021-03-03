@@ -24,3 +24,10 @@ void Device::creatInterface(const enumTypeConnection::type& type)
     }
 
 }
+
+void Device::showDialog()
+{
+    if(m_interfaceConnected){
+    m_interfaceConnected->showDialog();
+    }
+}

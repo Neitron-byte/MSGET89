@@ -15,7 +15,7 @@ public:
     virtual void close() = 0;
     virtual void write() = 0;
     virtual void read() = 0;
-
+    virtual void showDialog() = 0;
 
 signals:
 

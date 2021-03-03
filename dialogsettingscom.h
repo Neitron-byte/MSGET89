@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include "dialogsettingscom.h"
 
 namespace Ui {
 class DialogSettingsCom;
@@ -25,6 +26,7 @@ public:
 
 private:
     Ui::DialogSettingsCom *ui;
+
 
 public:
     QString getNameCom();

@@ -31,6 +31,7 @@ DeviceDialog::DeviceDialog(QWidget *parent) :
     this->addModel();
     this->addTypeConnected();
 
+    qDebug()<<m_calibrator;
 
 }
 
@@ -41,28 +42,8 @@ DeviceDialog::~DeviceDialog()
 
 void DeviceDialog::on_pushButton_settings_cal_clicked()
 {
-    if(m_typeConnectCalibrator == enumTypeConnection::COM){
-       DialogSettingsCom dlg(this);
-       switch (dlg.exec()) {
-        case QDialog::Accepted:
-           qDebug() << "Accepted";
-                ComInterface::Settings Setting;
-                Setting.name = dlg.getNameCom();
-                Setting.baudRate = dlg.getBaudRate();
-                Setting.dataBits = dlg.getDataBits();
-                Setting.flowControl = dlg.getFlow();
-                Setting.parity = dlg.getParity();
-                Setting.stopBits = dlg.getStopBits();
-               emit setSettingsCom(Setting);
-           break;
-       case QDialog::Rejected:
-           qDebug() << "Rejected";
-           break;
-       default:
-           qDebug() << "Unexpected";
-       }
-      }
 
+    emit showDialogSettingCal();
       //connect( &dlg, SIGNAL( applied() ), SLOT( onApplied() ) );
 }
 
@@ -93,4 +74,19 @@ void DeviceDialog::on_comboBox_Type_conVol_currentIndexChanged(int index)
     m_typeConnectVoltmeter = ui->comboBox_Type_conVol->itemData(index).value<enumTypeConnection::type>();
     //qDebug()<<m_typeConnectVoltmeter;
     emit createConnectionVoltmeter(m_typeConnectVoltmeter);
+}
+
+void DeviceDialog::on_pushButton_settings_Vol_clicked()
+{
+    emit showDialogSettingVol();
+}
+
+void DeviceDialog::on_pushButton_Connect_to_Cal_clicked()
+{
+    emit connectionCal();
+}
+
+void DeviceDialog::on_pushButton_Connect_to_vol_clicked()
+{
+    emit connectionVol();
 }

@@ -29,15 +29,13 @@ public:
      void close() override;
      void write() override;
      void read() override;
-
-public slots:
-
-     void setSettings(const Settings&&);
+     void showDialog() override;
 
 private:
      Settings m_currentSettings;
 
-     friend class DeviceDialog;
+     QSerialPort* m_serial = nullptr;
+
 };
 
 

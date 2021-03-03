@@ -39,6 +39,12 @@ private slots:
 
     void on_comboBox_Type_conVol_currentIndexChanged(int index);
 
+    void on_pushButton_settings_Vol_clicked();
+
+    void on_pushButton_Connect_to_Cal_clicked();
+
+    void on_pushButton_Connect_to_vol_clicked();
+
 signals:
     //создание приборов
     void createCalibrator(const enumModelDevice::models&);
@@ -48,8 +54,13 @@ signals:
     void createConnectionCalibrator(const enumTypeConnection::type&);
     void createConnectionVoltmeter(const enumTypeConnection::type&);
 
-    //настройка СOM
-    void setSettingsCom(ComInterface::Settings);
+    //вызов диалогового окна настроек
+    void showDialogSettingCal();
+    void showDialogSettingVol();
+
+    //сигнал на подключение
+    void connectionCal();
+    void connectionVol();
 
 private:
     Ui::DeviceDialog *ui;
@@ -59,8 +70,6 @@ private:
     //тип подключения
     enumTypeConnection::type m_typeConnectCalibrator;
     enumTypeConnection::type m_typeConnectVoltmeter;
-
-
 
 };
 

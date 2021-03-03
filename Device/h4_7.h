@@ -8,6 +8,7 @@
 
 class H4_7 : public Device, public ICalibrator
 {
+
 public:
     H4_7();
     ~H4_7();

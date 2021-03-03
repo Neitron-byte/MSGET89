@@ -15,10 +15,14 @@ public:
     explicit Device(QObject *parent = nullptr);
     ~Device();
     void creatInterface(const enumTypeConnection::type&);
+    void showDialog();
 signals:
 
 protected:
     InterfaceConnect* m_interfaceConnected = nullptr;
+
+
+
 
  };
 

@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QStatusBar>
 #include <QLabel>
-#include <devicedialog.h>
 #include <QDebug>
 #include <controller.h>
 
@@ -29,9 +28,6 @@ private:
     //отображение состония подключения к приборам
     QLabel *m_status1 = nullptr;//статус подключения QSatusBar
     QLabel *m_status2 = nullptr;//статус подключения QSatusBar
-
-    //диалоговое окно настройки оборудования
-    DeviceDialog* m_settingsDevices = nullptr;
 
     // Контроллер управления приборами
     Controller* m_controller = nullptr;
