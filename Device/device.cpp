@@ -18,6 +18,8 @@ void Device::creatInterface(const enumTypeConnection::type& type)
     switch (type) {
     case enumTypeConnection::COM:
         m_interfaceConnected = new ComInterface();
+        connect(m_interfaceConnected,SIGNAL(signalStatus(const QString&)), SIGNAL(signalStatusDev(const QString&)));
+
         break;
     default:
         break;
@@ -31,3 +33,6 @@ void Device::showDialog()
     m_interfaceConnected->showDialog();
     }
 }
+
+
+

@@ -5,6 +5,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QDebug>
 #include "devicedialog.h"
+#include "QObject"
 
 
 //___________________Класс наследник, реализующий интерфейс через COM-порт___________________//
@@ -12,6 +13,7 @@
 
 class  ComInterface : public InterfaceConnect
 {
+    Q_OBJECT
 public:
     struct Settings {
         QString name;
@@ -30,6 +32,12 @@ public:
      void write() override;
      void read() override;
      void showDialog() override;
+
+public    slots:
+    void handleError(QSerialPort::SerialPortError error);
+
+signals:
+     void signalStatus (const QString&);
 
 private:
      Settings m_currentSettings;

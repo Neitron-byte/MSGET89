@@ -22,6 +22,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    //в статус бар1
+    void inStatusBar1(const QString&);
+    //в статус бар2
+    void inStatusBar2(const QString&);
+
 private:
     Ui::MainWindow *ui;
 

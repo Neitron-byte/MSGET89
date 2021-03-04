@@ -12,7 +12,7 @@ HP34420::~HP34420()
 
 void HP34420::connecting()
 {
-
+    m_interfaceConnected->open();
 }
 
 void HP34420::disconnecting()

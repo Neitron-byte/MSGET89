@@ -4,7 +4,8 @@ ComInterface::ComInterface()
 {
     qDebug()<<"Constructor COM";
     m_serial = new QSerialPort();
-    connect(m_serial, &QSerialPort::errorOccurred, this, &H4_7::handleError);
+    connect(m_serial, &QSerialPort::errorOccurred, this, &ComInterface::handleError);
+
 }
 
 ComInterface::~ComInterface()
@@ -14,7 +15,7 @@ ComInterface::~ComInterface()
 
 void ComInterface::open()
 {
-    qDebug()<<m_currentSettings.name<< " Open";
+    //qDebug()<<m_currentSettings.name<< " Open";
 
     m_serial->setPortName(m_currentSettings.name);
     m_serial->setBaudRate(m_currentSettings.baudRate);
@@ -24,6 +25,12 @@ void ComInterface::open()
     m_serial->setFlowControl(m_currentSettings.flowControl);
     if (m_serial->open(QIODevice::ReadWrite)) {
         qDebug()<<m_currentSettings.name << "is open";
+        emit signalStatus (tr("Connected to %1 : %2, %3, %4, %5, %6")
+                                   .arg(m_currentSettings.name).arg(m_currentSettings.baudRate).arg(m_currentSettings.dataBits)
+                                .arg(m_currentSettings.parity).arg(m_currentSettings.stopBits).arg(m_currentSettings.flowControl));
+
+    } else {
+        emit signalStatus (tr("Error connecting to %1").arg(m_currentSettings.name));
     }
 }
 
@@ -70,6 +77,14 @@ void ComInterface::showDialog()
             <<m_currentSettings.flowControl
            <<m_currentSettings.parity
           <<m_currentSettings.stopBits;
+}
+
+void ComInterface::handleError(QSerialPort::SerialPortError error)
+{
+        emit signalStatus(m_serial->errorString());
+
+        this->close();
+
 }
 
 

@@ -5,6 +5,7 @@ Device *Controller::createDevice(const enumModelDevice::models& model)
     switch (model) {
     case enumModelDevice::HP34420:
         return new HP34420();
+
         break;
     case enumModelDevice::H4_7:
         return new H4_7();
@@ -31,7 +32,8 @@ Controller::Controller(QObject *parent) : QObject(parent)
     connect(m_settingsDevice,SIGNAL(showDialogSettingCal()),this,SLOT(showDialogSettingCal()));
     connect(m_settingsDevice,SIGNAL(showDialogSettingVol()),this,SLOT(showDialogSettingVol()));
     //подключение к приборам
-    connect(m_settingsDevice,SIGNAL(connectionCal()),m_calibrator->
+    connect(m_settingsDevice,SIGNAL(connectionCal()),this,SLOT(connectionCal()));
+    connect(m_settingsDevice,SIGNAL(connectionVol()),this,SLOT(connectionVol()));
 }
 
 Controller::~Controller()
@@ -57,6 +59,7 @@ void Controller::createCalibrator(const enumModelDevice::models& calibrator)
 {
         qDebug()<<"Create Calibrator";
         m_calibrator = createDevice(calibrator);
+        connect(m_calibrator,SIGNAL(signalStatusDev(QString)),SIGNAL(signalStatus1(QString)));
 
  }
 
@@ -64,7 +67,7 @@ void Controller::createVoltmeter(const enumModelDevice::models& voltmeter)
 {
         qDebug()<<"Create Voltmeter";
         m_voltmeter = createDevice(voltmeter);
-
+        connect(m_voltmeter,SIGNAL(signalStatusDev(QString)),SIGNAL(signalStatus2(QString)));
 }
 
 
@@ -95,5 +98,38 @@ void Controller::showDialogSettingVol()
 {
     if(m_voltmeter){
     m_voltmeter->showDialog();
+    }
+}
+
+void Controller::connectionCal()
+{
+    try{
+        H4_7* m_dev = dynamic_cast<H4_7*>(m_calibrator);
+        if(m_dev){
+            m_dev->connecting();
+        } else{
+                throw "Dynamic Type conversion error";
+            }
+    }
+    catch (const char* exception) {
+        emit signalStatus1(exception);
+    }
+
+
+
+}
+
+void Controller::connectionVol()
+{
+    try{
+        HP34420* m_dev = dynamic_cast<HP34420*>(m_voltmeter);
+        if(m_dev){
+            m_dev->connecting();
+        } else{
+                throw "Dynamic Type conversion error";
+            }
+    }
+    catch (const char* exception) {
+        emit signalStatus2(exception);
     }
 }

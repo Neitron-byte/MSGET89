@@ -8,6 +8,8 @@
 #include "Device/cominterface.h"
 #include <QDebug>
 
+
+
 class Device : public QObject
 {
     Q_OBJECT
@@ -16,7 +18,9 @@ public:
     ~Device();
     void creatInterface(const enumTypeConnection::type&);
     void showDialog();
+
 signals:
+    void signalStatusDev(const QString& );
 
 protected:
     InterfaceConnect* m_interfaceConnected = nullptr;

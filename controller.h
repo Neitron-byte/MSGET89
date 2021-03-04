@@ -37,12 +37,17 @@ public slots:
     void createInterfaceCalibrator(const enumTypeConnection::type& );
     void createInterfaceVoltmeter(const enumTypeConnection::type& );
 
-    //____показ диалогового окна настроек интерфейса_____//
+    //____отображение диалогового окна настроек интерфейса_____//
     void showDialogSettingCal();
     void showDialogSettingVol();
 
-signals:
+    //______подключение к приборам__________//
+    void connectionCal();
+    void connectionVol();
 
+signals:
+    void signalStatus1(const QString&);
+    void signalStatus2(const QString&);
 
 private:
     // Указатели на прибора

@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_status2 = new QLabel(this);
     ui->statusbar->addWidget(m_status2);
 
+    connect(m_controller,SIGNAL(signalStatus1(QString)),this,SLOT(inStatusBar1(QString)));
+    connect(m_controller,SIGNAL(signalStatus2(QString)),this,SLOT(inStatusBar2(QString)));
 }
 
 MainWindow::~MainWindow()
@@ -27,6 +29,18 @@ MainWindow::~MainWindow()
     if(m_controller){
     delete m_controller;
     }
+}
+
+void MainWindow::inStatusBar1(const QString & message)
+{
+
+   m_status1->setText(message);
+
+}
+
+void MainWindow::inStatusBar2(const QString & message)
+{
+    m_status2->setText(message);
 }
 
 
