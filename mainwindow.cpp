@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow),
       m_controller(new Controller)
 
+
 {
     ui->setupUi(this);
 
@@ -25,10 +26,13 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete m_tabWidget;
+    //delete m_dataWidget;
 
     if(m_controller){
     delete m_controller;
     }
+
 }
 
 void MainWindow::inStatusBar1(const QString & message)
@@ -48,4 +52,20 @@ void MainWindow::on_action_Connecting_triggered()
 {
 
     m_controller->showDialogSettingDevice();
+}
+
+void MainWindow::on_actionNew_triggered()
+{
+    m_tabWidget = new QTabWidget(this);
+    m_tabWidget->addTab(new mainData,tr("Data") );
+    m_tabWidget->addTab(new mainData,tr("Database"));
+
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addWidget(m_tabWidget);
+
+    this->setLayout(layout);
+    this->show();
+
+    //ui->setupUi(m_tabWidget);
+
 }

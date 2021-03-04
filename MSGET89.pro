@@ -28,6 +28,7 @@ SOURCES += \
     devicedialog.cpp \
     dialogsettingscom.cpp \
     main.cpp \
+    maindata.cpp \
     mainwindow.cpp
 
 HEADERS += \
@@ -41,11 +42,13 @@ HEADERS += \
     controller.h \
     devicedialog.h \
     dialogsettingscom.h \
+    maindata.h \
     mainwindow.h
 
 FORMS += \
     devicedialog.ui \
     dialogsettingscom.ui \
+    maindata.ui \
     mainwindow.ui
 
 TRANSLATIONS += msget89_ru.ts

@@ -17,7 +17,7 @@ void HP34420::connecting()
 
 void HP34420::disconnecting()
 {
-
+    m_interfaceConnected->close();
 }
 
 void HP34420::receiveValue()

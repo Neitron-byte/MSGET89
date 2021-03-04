@@ -5,7 +5,13 @@
 #include <QStatusBar>
 #include <QLabel>
 #include <QDebug>
-#include <controller.h>
+#include <QTabWidget>
+#include <QHBoxLayout>
+#include "maindata.h"
+
+#include "controller.h"
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,6 +23,8 @@ class MainWindow : public QMainWindow
 private slots:
 
     void on_action_Connecting_triggered();
+
+    void on_actionNew_triggered();
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -30,6 +38,8 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
+    QTabWidget* m_tabWidget = nullptr;
+
 
     //отображение состония подключения к приборам
     QLabel *m_status1 = nullptr;//статус подключения QSatusBar
