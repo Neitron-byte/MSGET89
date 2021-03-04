@@ -103,33 +103,35 @@ void Controller::showDialogSettingVol()
 
 void Controller::connectionCal()
 {
-    try{
-        H4_7* m_dev = dynamic_cast<H4_7*>(m_calibrator);
-        if(m_dev){
-            m_dev->connecting();
-        } else{
-                throw "Dynamic Type conversion error";
-            }
-    }
-    catch (const char* exception) {
-        emit signalStatus1(exception);
-    }
-
-
+//    try{
+//        H4_7* m_dev = dynamic_cast<H4_7*>(m_calibrator);
+//        if(m_dev){
+//            m_dev->connecting();
+//        } else{
+//                throw "Dynamic Type conversion error";
+//            }
+//    }
+//    catch (const char* exception) {
+//        emit signalStatus1(exception);
+//    }
+    m_calibrator->connecting();
+   // m_calibrator->
+    m_calibrator->se
 
 }
 
 void Controller::connectionVol()
 {
-    try{
-        HP34420* m_dev = dynamic_cast<HP34420*>(m_voltmeter);
-        if(m_dev){
-            m_dev->connecting();
-        } else{
-                throw "Dynamic Type conversion error";
-            }
-    }
-    catch (const char* exception) {
-        emit signalStatus2(exception);
-    }
+//    try{
+//        HP34420* m_dev = dynamic_cast<HP34420*>(m_voltmeter);
+//        if(m_dev){
+//            m_dev->connecting();
+//        } else{
+//                throw "Dynamic Type conversion error";
+//            }
+//    }
+//    catch (const char* exception) {
+//        emit signalStatus2(exception);
+//    }
+    m_voltmeter->connecting();
 }

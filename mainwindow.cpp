@@ -19,8 +19,12 @@ MainWindow::MainWindow(QWidget *parent)
     m_status2 = new QLabel(this);
     ui->statusbar->addWidget(m_status2);
 
+
+    //получение сообщений о состонии подключения в статус бар
     connect(m_controller,SIGNAL(signalStatus1(QString)),this,SLOT(inStatusBar1(QString)));
     connect(m_controller,SIGNAL(signalStatus2(QString)),this,SLOT(inStatusBar2(QString)));
+
+
 }
 
 MainWindow::~MainWindow()
@@ -56,16 +60,16 @@ void MainWindow::on_action_Connecting_triggered()
 
 void MainWindow::on_actionNew_triggered()
 {
+    ui->menu_Settings_Device->setEnabled(true);
+
     m_tabWidget = new QTabWidget(this);
     m_tabWidget->addTab(new mainData,tr("Data") );
     m_tabWidget->addTab(new mainData,tr("Database"));
 
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(m_tabWidget);
-
+    this->setCentralWidget(m_tabWidget);
     this->setLayout(layout);
     this->show();
-
-    //ui->setupUi(m_tabWidget);
 
 }

@@ -10,11 +10,11 @@
 
 
 
-class Device : public QObject
+class Device : public IDevice
 {
     Q_OBJECT
 public:
-    explicit Device(QObject *parent = nullptr);
+    Device();
     ~Device();
     void creatInterface(const enumTypeConnection::type&);
     void showDialog();

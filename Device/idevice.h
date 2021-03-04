@@ -14,7 +14,7 @@ public:
 
 signals:
 
-private:
+public:
     virtual void connecting() = 0;
     virtual void disconnecting() = 0;
 
@@ -24,6 +24,7 @@ private:
 
 class ICalibrator : public IDevice
 {
+public:
     virtual void setValue() = 0;
 };
 
@@ -31,6 +32,7 @@ class ICalibrator : public IDevice
 
 class IVoltmeter : public IDevice
 {
+public:
     virtual void receiveValue() = 0;
 };
 
