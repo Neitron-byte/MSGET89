@@ -12,7 +12,7 @@ class Voltmeter: public Device
 public:
     Voltmeter();
     virtual ~Voltmeter();
-    virtual void receiveValue() =0;
+    virtual QByteArray receiveValue(uint ) =0;
 
 };
 

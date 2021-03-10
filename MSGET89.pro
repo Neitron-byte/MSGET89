@@ -23,7 +23,6 @@ SOURCES += \
     Device/device.cpp \
     Device/h4_7.cpp \
     Device/hp34420.cpp \
-    Device/idevice.cpp \
     Device/interfaceconnect.cpp \
     Device/voltmeter.cpp \
     controller.cpp \
@@ -31,7 +30,8 @@ SOURCES += \
     dialogsettingscom.cpp \
     main.cpp \
     maindata.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    verification.cpp
 
 HEADERS += \
     Device/EnumModelsDevice.h \
@@ -46,7 +46,8 @@ HEADERS += \
     devicedialog.h \
     dialogsettingscom.h \
     maindata.h \
-    mainwindow.h
+    mainwindow.h \
+    verification.h
 
 FORMS += \
     devicedialog.ui \

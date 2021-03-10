@@ -134,3 +134,12 @@ void Controller::connectionVol()
 //    }
     m_voltmeter->connecting();
 }
+
+void Controller::setVeryfycation(Verification * veryfication)
+{
+    if(m_veryfication){
+    delete this->m_veryfication;
+    }
+    m_veryfication = veryfication;
+
+}

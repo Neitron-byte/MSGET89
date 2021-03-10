@@ -36,12 +36,15 @@ void Device::showDialog()
 
 void Device::connecting()
 {
-    m_interfaceConnected->open();
+    if (m_interfaceConnected->open()){
+        is_connect = true;
+    }
 
 }
 
 void Device::disconnecting()
 {
+    is_connect = false;
     m_interfaceConnected->close();
 }
 

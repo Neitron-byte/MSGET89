@@ -11,10 +11,10 @@ class InterfaceConnect : public QObject
 public:
     explicit InterfaceConnect(QObject *parent = nullptr);
 
-    virtual void open() = 0;
+    virtual bool open() = 0;
     virtual void close() = 0;
-    virtual void write() = 0;
-    virtual void read() = 0;
+    virtual bool write(const QByteArray&) = 0;
+    virtual QByteArray read() = 0;
     virtual void showDialog() = 0;
 
 signals:

@@ -2,7 +2,6 @@
 #define CALIBRATOR_H
 
 #include <QObject>
-#include "idevice.h"
 #include "Device/cominterface.h"
 #include "device.h"
 #include <QDebug>
@@ -14,7 +13,8 @@ class Calibrator: public Device
 public:
     Calibrator();
     virtual ~Calibrator();
-    virtual void setValue() = 0;
+    virtual bool setValue(float ) = 0;
+    virtual bool setFreqValue(float , uint ) = 0;
 
 
 };

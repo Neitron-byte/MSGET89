@@ -25,7 +25,10 @@ public:
     virtual void disconnecting();
 
 protected:
+    //интерфейс покдлючения прибора
     InterfaceConnect* m_interfaceConnected = nullptr;
+    //состояние подключения
+    bool is_connect = false;
 
 
 

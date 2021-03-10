@@ -10,6 +10,7 @@
 #include "Device/EnumModelsDevice.h"
 #include <QDebug>
 #include <devicedialog.h>
+#include "verification.h"
 
 
 
@@ -46,6 +47,10 @@ public slots:
     void connectionCal();
     void connectionVol();
 
+    //____замена процедуры поверки___________//
+    void setVeryfycation(Verification* );
+
+
 signals:
     void signalStatus1(const QString&);
     void signalStatus2(const QString&);
@@ -57,6 +62,9 @@ private:
 
     //диалоговое окно настройки приборов
     DeviceDialog* m_settingsDevice = nullptr;
+
+    //алгоритм поверки
+    Verification* m_veryfication = nullptr;
 };
 
 

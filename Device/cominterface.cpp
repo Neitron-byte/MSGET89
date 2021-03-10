@@ -13,7 +13,7 @@ ComInterface::~ComInterface()
     qDebug()<<"Distructor COM";
 }
 
-void ComInterface::open()
+bool ComInterface::open()
 {
     //qDebug()<<m_currentSettings.name<< " Open";
 
@@ -25,30 +25,47 @@ void ComInterface::open()
     m_serial->setFlowControl(m_currentSettings.flowControl);
     if (m_serial->open(QIODevice::ReadWrite)) {
         qDebug()<<m_currentSettings.name << "is open";
+        is_Open = true;
         emit signalStatus (tr("Connected to %1 : %2, %3, %4, %5, %6")
                                    .arg(m_currentSettings.name).arg(m_currentSettings.baudRate).arg(m_currentSettings.dataBits)
                                 .arg(m_currentSettings.parity).arg(m_currentSettings.stopBits).arg(m_currentSettings.flowControl));
-
+        return true;
     } else {
         emit signalStatus (tr("Error connecting to %1").arg(m_currentSettings.name));
+        return false;
     }
 }
 
 void ComInterface::close()
 {
     if (m_serial->isOpen()){
+        is_Open = false;
         m_serial->close();
     }
 }
 
-void ComInterface::write()
+bool ComInterface::write(const QByteArray& array)
 {
+    if(is_Open){
+        if(m_serial->write(array))
+        {
+            if(m_serial->waitForBytesWritten(m_timeOut)){
+                return true;
+             }
+         }
 
+        return false;
+    }
 }
-
-void ComInterface::read()
+QByteArray ComInterface::read()
 {
-
+    if(is_Open){
+    QByteArray responseData = m_serial->readAll();
+    while (m_serial->waitForReadyRead(m_timeOut)) {
+        responseData += m_serial->readAll();
+    }
+     return responseData;
+    }
 }
 
 void ComInterface::showDialog()
@@ -78,6 +95,8 @@ void ComInterface::showDialog()
            <<m_currentSettings.parity
           <<m_currentSettings.stopBits;
 }
+
+
 
 void ComInterface::handleError(QSerialPort::SerialPortError error)
 {

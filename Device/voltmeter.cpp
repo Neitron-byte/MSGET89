@@ -12,7 +12,4 @@ Voltmeter::~Voltmeter()
 
 }
 
-void Voltmeter::receiveValue()
-{
 
-}

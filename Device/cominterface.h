@@ -27,11 +27,17 @@ public:
 public:
      ComInterface();
      ~ComInterface();
-     void open() override;
+     //открытие порта
+     bool open() override;
+     //Закрыть....
      void close() override;
-     void write() override;
-     void read() override;
+     //Записать
+     bool write(const QByteArray&) override;
+     //Чтение данных
+     QByteArray read() override;
+     //Показать окно настроек интерфейса подключения прибора
      void showDialog() override;
+
 
 public    slots:
     void handleError(QSerialPort::SerialPortError error);
@@ -40,9 +46,17 @@ signals:
      void signalStatus (const QString&);
 
 private:
+     //настройки Com-порта
      Settings m_currentSettings;
 
+     // указатель на COM
      QSerialPort* m_serial = nullptr;
+
+     //cтатус подключения
+     bool is_Open = false;
+
+     //тайм-аут
+     uint m_timeOut = 30000;
 
 };
 
