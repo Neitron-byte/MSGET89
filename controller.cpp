@@ -1,30 +1,13 @@
 #include "controller.h"
 
-Device *Controller::createDevice(const enumModelDevice::models& model)
-{
-    switch (model) {
-    case enumModelDevice::HP34420:
-        return new HP34420();
-
-        break;
-    case enumModelDevice::H4_7:
-        return new H4_7();
-        break;
-    default:
-        return nullptr;
-        break;
-    }
-
-
-}
 
 Controller::Controller(QObject *parent) : QObject(parent)
   , m_settingsDevice(new DeviceDialog)
 {
     qDebug()<<"Constructor controller";
     //создание приборов
-    connect(m_settingsDevice,SIGNAL(createCalibrator(enumModelDevice::models)),this,SLOT(createCalibrator(enumModelDevice::models)));
-    connect(m_settingsDevice,SIGNAL(createVoltmeter(enumModelDevice::models)),this,SLOT(createVoltmeter(enumModelDevice::models)));
+    connect(m_settingsDevice,SIGNAL(createCalibrator(enumModelCalibrator::models)),this,SLOT(createCalibrator(enumModelCalibrator::models)));
+    connect(m_settingsDevice,SIGNAL(createVoltmeter(enumModelVoltmeter::models)),this,SLOT(createVoltmeter(enumModelVoltmeter::models)));
     //создание интерфейса подключения
     connect(m_settingsDevice,SIGNAL(createConnectionCalibrator(enumTypeConnection::type)),this,SLOT(createInterfaceCalibrator(enumTypeConnection::type)));
     connect(m_settingsDevice,SIGNAL(createConnectionVoltmeter(enumTypeConnection::type)),this, SLOT(createInterfaceVoltmeter(enumTypeConnection::type)));
@@ -55,19 +38,38 @@ void Controller::showDialogSettingDevice()
     m_settingsDevice->show();
 }
 
-void Controller::createCalibrator(const enumModelDevice::models& calibrator)
+void Controller::createCalibrator(const enumModelCalibrator::models& calibrator)
 {
-        qDebug()<<"Create Calibrator";
-        m_calibrator = createDevice(calibrator);
+
+    switch (calibrator) {
+    case enumModelCalibrator::H4_7:
+        m_calibrator = new H4_7();
         connect(m_calibrator,SIGNAL(signalStatusDev(QString)),SIGNAL(signalStatus1(QString)));
+        break;
+    default:
+
+        break;
+    }
+
+
 
  }
 
-void Controller::createVoltmeter(const enumModelDevice::models& voltmeter)
+void Controller::createVoltmeter(const enumModelVoltmeter::models& voltmeter)
 {
         qDebug()<<"Create Voltmeter";
-        m_voltmeter = createDevice(voltmeter);
-        connect(m_voltmeter,SIGNAL(signalStatusDev(QString)),SIGNAL(signalStatus2(QString)));
+
+        switch (voltmeter) {
+        case enumModelVoltmeter::HP34420:
+            m_voltmeter = new HP34420();
+            connect(m_voltmeter,SIGNAL(signalStatusDev(QString)),SIGNAL(signalStatus2(QString)));
+            break;
+        default:
+
+            break;
+        }
+
+
 }
 
 
@@ -114,10 +116,7 @@ void Controller::connectionCal()
 //    catch (const char* exception) {
 //        emit signalStatus1(exception);
 //    }
-    m_calibrator->connecting();
-   // m_calibrator->
-    m_calibrator->se
-
+  m_calibrator->connecting();
 }
 
 void Controller::connectionVol()

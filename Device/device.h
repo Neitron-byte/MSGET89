@@ -2,7 +2,6 @@
 #define DEVICE_H
 
 #include <QObject>
-#include "Device/idevice.h"
 #include "Device/interfaceconnect.h"
 #include "Device/EnumModelsDevice.h"
 #include "Device/cominterface.h"
@@ -10,17 +9,20 @@
 
 
 
-class Device : public IDevice
+class Device : public QObject
 {
     Q_OBJECT
-public:
-    Device();
-    ~Device();
-    void creatInterface(const enumTypeConnection::type&);
-    void showDialog();
 
 signals:
     void signalStatusDev(const QString& );
+
+public:
+    explicit Device(QObject *parent = nullptr);
+    virtual ~Device();
+    void creatInterface(const enumTypeConnection::type&);
+    void showDialog();
+    virtual void connecting();
+    virtual void disconnecting();
 
 protected:
     InterfaceConnect* m_interfaceConnected = nullptr;

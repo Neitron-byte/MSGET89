@@ -3,11 +3,16 @@
 
 #include <QObject>
 #include "Device/device.h"
+#include "Device/calibrator.h"
 #include "Device/h4_7.h"
+#include "Device/voltmeter.h"
 #include "Device/hp34420.h"
 #include "Device/EnumModelsDevice.h"
 #include <QDebug>
 #include <devicedialog.h>
+
+
+
 
 
 //__________Класс контроллер для управления приборами__________//
@@ -15,10 +20,6 @@
 class Controller : public QObject
 {
     Q_OBJECT
-
-
-    //фабричный метод создания приборов
-    Device* createDevice(const enumModelDevice::models& );
 
 public:
     explicit Controller(QObject *parent = nullptr);
@@ -30,8 +31,8 @@ public:
 public slots:
 
     //____создание приборов___________//
-    void createCalibrator(const enumModelDevice::models&);
-    void createVoltmeter(const enumModelDevice::models&);
+    void createCalibrator(const enumModelCalibrator::models&);
+    void createVoltmeter(const enumModelVoltmeter::models&);
 
     //____создание интерфеса взаимодействия______//
     void createInterfaceCalibrator(const enumTypeConnection::type& );
@@ -51,8 +52,8 @@ signals:
 
 private:
     // Указатели на прибора
-    Device* m_calibrator = nullptr;
-    Device* m_voltmeter = nullptr;
+    Calibrator* m_calibrator = nullptr;
+    Voltmeter* m_voltmeter = nullptr;
 
     //диалоговое окно настройки приборов
     DeviceDialog* m_settingsDevice = nullptr;

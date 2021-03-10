@@ -5,16 +5,16 @@
 #include "Device/device.h"
 #include "Device/cominterface.h"
 #include "QDebug"
+#include "calibrator.h"
 
-class H4_7 : public Device, public ICalibrator
+class H4_7 : public Calibrator
 {
 
 public:
     H4_7();
-    ~H4_7();
-    void connecting() override;
-    void disconnecting() override;
-    void setValue() override;
+    virtual~H4_7();
+    virtual void setValue() override;
+
 
 };
 

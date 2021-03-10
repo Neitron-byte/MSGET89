@@ -47,8 +47,8 @@ private slots:
 
 signals:
     //создание приборов
-    void createCalibrator(const enumModelDevice::models&);
-    void createVoltmeter(const enumModelDevice::models&);
+    void createCalibrator(const enumModelCalibrator::models&);
+    void createVoltmeter(const enumModelVoltmeter::models&);
 
     //создание интерфейса
     void createConnectionCalibrator(const enumTypeConnection::type&);
@@ -65,8 +65,8 @@ signals:
 private:
     Ui::DeviceDialog *ui;
     //модели
-    enumModelDevice::models m_calibrator;
-    enumModelDevice::models m_voltmeter;
+    enumModelCalibrator::models m_calibrator;
+    enumModelVoltmeter::models m_voltmeter;
     //тип подключения
     enumTypeConnection::type m_typeConnectCalibrator;
     enumTypeConnection::type m_typeConnectVoltmeter;

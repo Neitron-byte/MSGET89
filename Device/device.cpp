@@ -1,6 +1,6 @@
 #include "device.h"
 
-Device::Device()
+Device::Device(QObject *parent)
 {
 
 }
@@ -32,6 +32,17 @@ void Device::showDialog()
     if(m_interfaceConnected){
     m_interfaceConnected->showDialog();
     }
+}
+
+void Device::connecting()
+{
+    m_interfaceConnected->open();
+
+}
+
+void Device::disconnecting()
+{
+    m_interfaceConnected->close();
 }
 
 

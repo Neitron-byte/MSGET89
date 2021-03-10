@@ -6,9 +6,9 @@
 void DeviceDialog::addModel() const
 {
     ui->comboBox_device_cal->addItem("");
-    ui->comboBox_device_cal->addItem(QStringLiteral("H4-7"), enumModelDevice::H4_7);
+    ui->comboBox_device_cal->addItem(QStringLiteral("H4-7"), enumModelCalibrator::H4_7);
     ui->comboBox_Device_Vol->addItem("");
-    ui->comboBox_Device_Vol->addItem(QStringLiteral("HP34420A"),enumModelDevice::HP34420);
+    ui->comboBox_Device_Vol->addItem(QStringLiteral("HP34420A"),enumModelVoltmeter::HP34420);
 }
 
 void DeviceDialog::addTypeConnected() const
@@ -50,14 +50,14 @@ void DeviceDialog::on_pushButton_settings_cal_clicked()
 void DeviceDialog::on_comboBox_device_cal_currentIndexChanged(int index)
 {
 
-    m_calibrator = ui->comboBox_device_cal->itemData(index).value<enumModelDevice::models>();
+    m_calibrator = ui->comboBox_device_cal->itemData(index).value<enumModelCalibrator::models>();
     //qDebug()<<m_calibrator;
     emit createCalibrator(m_calibrator);
 }
 
 void DeviceDialog::on_comboBox_Device_Vol_currentIndexChanged(int index)
 {
-    m_voltmeter = ui->comboBox_Device_Vol->itemData(index).value<enumModelDevice::models>();
+    m_voltmeter = ui->comboBox_Device_Vol->itemData(index).value<enumModelVoltmeter::models>();
     //qDebug()<<m_voltmeter;
     emit createVoltmeter(m_voltmeter);
 }

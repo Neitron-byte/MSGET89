@@ -3,7 +3,31 @@
 
 #include <QObject>
 
-class enumModelDevice : public QObject
+//______________Модели калибратора__________________//
+
+class enumModelCalibrator : public QObject
+
+{
+    Q_OBJECT
+
+public:
+
+    enum models
+    {
+        H4_7
+
+    };
+
+
+    Q_ENUM(models)
+
+
+    enumModelCalibrator (QObject *parent = nullptr);
+};
+
+//______________Модели вольтметра__________________//
+
+class enumModelVoltmeter: public QObject
 
 {
     Q_OBJECT
@@ -12,17 +36,18 @@ public:
     //__________Модели калибраторов__________//
     enum models
     {
-        H4_7,
         HP34420
-
     };
+
+
     Q_ENUM(models)
 
 
-
-    //enumsdevice() = delete;
-    enumVodelDevice (QObject *parent = nullptr);
+    enumModelVoltmeter (QObject *parent = nullptr);
 };
+
+//_____________Тип подключения__________________//
+
 
 class enumTypeConnection : public QObject
 
