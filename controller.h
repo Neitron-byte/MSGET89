@@ -12,8 +12,8 @@
 #include <devicedialog.h>
 #include "verification.h"
 
-
-
+//неполное объявление класса поверки
+class Verification;
 
 
 //__________Класс контроллер для управления приборами__________//
@@ -52,11 +52,12 @@ public slots:
 
 
 signals:
+    //сигналы на отправка статуса подключения в статусбар главного окна приложения
     void signalStatus1(const QString&);
     void signalStatus2(const QString&);
 
 private:
-    // Указатели на прибора
+    // Указатели на приборы
     Calibrator* m_calibrator = nullptr;
     Voltmeter* m_voltmeter = nullptr;
 

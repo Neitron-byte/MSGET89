@@ -1,14 +1,79 @@
 #include "maindata.h"
 #include "ui_maindata.h"
 
+void mainData::SetLenght()
+{
+    ui->doubleSpinBox_temp->setMinimum(0);
+    ui->doubleSpinBox_temp->setMaximum(40);
+    ui->doubleSpinBox_temp->setSingleStep(0.1);
+
+    ui->lineEdit_full_Name->setMaxLength(10);
+    ui->lineEdit_Model_Ver_Device->setMaxLength(5);
+    ui->lineEdit_serialNum_Dev->setMaxLength(5);
+}
+
+void mainData::addItem()
+{
+    ui->comboBox_calibration_Dev->addItem(tr("None"));
+    ui->comboBox_calibration_Dev->addItem(tr("Converter U"));
+    ui->comboBox_calibration_Dev->addItem(tr("Converter I"));
+
+    ui->comboBox_typeRefDev->addItem(tr("None"));
+    ui->comboBox_typeRefDev->addItem(tr("Line"));
+    ui->comboBox_typeRefDev->addItem(tr("Square"));
+
+    ui->comboBox_typeVerdev->addItem(tr("None"));
+    ui->comboBox_typeVerdev->addItem(tr("Line"));
+    ui->comboBox_typeVerdev->addItem(tr("Square"));
+
+}
+
 mainData::mainData(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::mainData)
 {
     ui->setupUi(this);
+
+    //TimeDate
+    m_timerinterval = 1000;
+    m_idTimer = startTimer(m_timerinterval);
+    time = QTime::currentTime();
+    date = QDate::currentDate();
+    slot_set_Time(time.toString(Qt::SystemLocaleLongDate));
+    slot_set_Date(date.toString(Qt::SystemLocaleLongDate));
+
+    //ограничения на ввод данных
+    this->SetLenght();
+
+    //добавление в инетерфейс
+    this->addItem();
 }
 
 mainData::~mainData()
 {
     delete ui;
+}
+
+void mainData::slot_set_Time(const QString strTime)
+{
+    ui->label_Time->setText(strTime);
+}
+
+void mainData::slot_set_Date(const QString strDate)
+{
+    ui->label_Date->setText(strDate);
+}
+
+
+void mainData::timerEvent(QTimerEvent *event)
+{
+    time = QTime::currentTime();
+    date = QDate::currentDate();
+    slot_set_Time(time.toString(Qt::SystemLocaleLongDate));
+    slot_set_Date(date.toString(Qt::SystemLocaleLongDate));
+}
+
+void mainData::on_comboBox_calibration_Dev_currentIndexChanged(int index)
+{
+
 }

@@ -7,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow),
       m_controller(new Controller)
 
-
 {
     ui->setupUi(this);
 
@@ -20,24 +19,36 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statusbar->addWidget(m_status2);
 
 
+
     //получение сообщений о состонии подключения в статус бар
     connect(m_controller,SIGNAL(signalStatus1(QString)),this,SLOT(inStatusBar1(QString)));
     connect(m_controller,SIGNAL(signalStatus2(QString)),this,SLOT(inStatusBar2(QString)));
+
 
 
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
-    delete m_tabWidget;
-    //delete m_dataWidget;
-
     if(m_controller){
     delete m_controller;
     }
-
+    if(m_database){
+        delete m_database;
+    }
+    if(m_data){
+        delete m_data;
+    }
+    if (m_tabWidget){
+        delete m_tabWidget;
+    }
+    delete ui;
 }
+
+
+
+
+
 
 void MainWindow::inStatusBar1(const QString & message)
 {
@@ -63,13 +74,16 @@ void MainWindow::on_actionNew_triggered()
     ui->menu_Settings_Device->setEnabled(true);
 
     m_tabWidget = new QTabWidget(this);
-    m_tabWidget->addTab(new mainData,tr("Data") );
-    m_tabWidget->addTab(new mainData,tr("Database"));
+    m_data = new mainData();
+    m_tabWidget->addTab(m_data,tr("Data") );
+    m_database = new Database();
+    m_tabWidget->addTab(m_database, tr("Database"));
 
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(m_tabWidget);
     this->setCentralWidget(m_tabWidget);
     this->setLayout(layout);
     this->show();
-
 }
+
+

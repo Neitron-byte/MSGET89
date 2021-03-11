@@ -30,6 +30,9 @@ Controller::~Controller()
     if(m_settingsDevice){
         delete m_settingsDevice;
     }
+    if(m_veryfication){
+        delete m_veryfication;
+    }
     qDebug()<<"Distructor controller";
 }
 
@@ -43,6 +46,9 @@ void Controller::createCalibrator(const enumModelCalibrator::models& calibrator)
 
     switch (calibrator) {
     case enumModelCalibrator::H4_7:
+        if (m_calibrator){
+           delete m_calibrator;
+        }
         m_calibrator = new H4_7();
         connect(m_calibrator,SIGNAL(signalStatusDev(QString)),SIGNAL(signalStatus1(QString)));
         break;
@@ -61,6 +67,9 @@ void Controller::createVoltmeter(const enumModelVoltmeter::models& voltmeter)
 
         switch (voltmeter) {
         case enumModelVoltmeter::HP34420:
+            if(m_voltmeter){
+                delete m_voltmeter;
+            }
             m_voltmeter = new HP34420();
             connect(m_voltmeter,SIGNAL(signalStatusDev(QString)),SIGNAL(signalStatus2(QString)));
             break;
@@ -105,33 +114,13 @@ void Controller::showDialogSettingVol()
 
 void Controller::connectionCal()
 {
-//    try{
-//        H4_7* m_dev = dynamic_cast<H4_7*>(m_calibrator);
-//        if(m_dev){
-//            m_dev->connecting();
-//        } else{
-//                throw "Dynamic Type conversion error";
-//            }
-//    }
-//    catch (const char* exception) {
-//        emit signalStatus1(exception);
-//    }
+
   m_calibrator->connecting();
 }
 
 void Controller::connectionVol()
 {
-//    try{
-//        HP34420* m_dev = dynamic_cast<HP34420*>(m_voltmeter);
-//        if(m_dev){
-//            m_dev->connecting();
-//        } else{
-//                throw "Dynamic Type conversion error";
-//            }
-//    }
-//    catch (const char* exception) {
-//        emit signalStatus2(exception);
-//    }
+
     m_voltmeter->connecting();
 }
 

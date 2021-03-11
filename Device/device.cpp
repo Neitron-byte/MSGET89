@@ -17,6 +17,9 @@ void Device::creatInterface(const enumTypeConnection::type& type)
 {
     switch (type) {
     case enumTypeConnection::COM:
+        if (m_interfaceConnected){
+            delete m_interfaceConnected;
+        }
         m_interfaceConnected = new ComInterface();
         connect(m_interfaceConnected,SIGNAL(signalStatus(const QString&)), SIGNAL(signalStatusDev(const QString&)));
 

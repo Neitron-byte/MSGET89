@@ -8,7 +8,7 @@
 #include <QTabWidget>
 #include <QHBoxLayout>
 #include "maindata.h"
-
+#include "database.h"
 #include "controller.h"
 
 
@@ -23,8 +23,8 @@ class MainWindow : public QMainWindow
 private slots:
 
     void on_action_Connecting_triggered();
-
     void on_actionNew_triggered();
+
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -38,8 +38,13 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
-    QTabWidget* m_tabWidget = nullptr;
 
+    //вкладки
+    QTabWidget* m_tabWidget = nullptr;
+    //входные данные
+    mainData* m_data = nullptr;
+    //виджет базы данных
+    Database* m_database = nullptr;
 
     //отображение состония подключения к приборам
     QLabel *m_status1 = nullptr;//статус подключения QSatusBar
@@ -47,5 +52,8 @@ private:
 
     // Контроллер управления приборами
     Controller* m_controller = nullptr;
+
+
+
 };
 #endif // MAINWINDOW_H

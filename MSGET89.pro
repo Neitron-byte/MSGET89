@@ -26,6 +26,7 @@ SOURCES += \
     Device/interfaceconnect.cpp \
     Device/voltmeter.cpp \
     controller.cpp \
+    database.cpp \
     devicedialog.cpp \
     dialogsettingscom.cpp \
     main.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     Device/interfaceconnect.h \
     Device/voltmeter.h \
     controller.h \
+    database.h \
     devicedialog.h \
     dialogsettingscom.h \
     maindata.h \
@@ -50,6 +52,7 @@ HEADERS += \
     verification.h
 
 FORMS += \
+    database.ui \
     devicedialog.ui \
     dialogsettingscom.ui \
     maindata.ui \
