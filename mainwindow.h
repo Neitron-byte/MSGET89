@@ -10,6 +10,7 @@
 #include "maindata.h"
 #include "database.h"
 #include "controller.h"
+#include "calibration.h"
 
 
 
@@ -43,8 +44,13 @@ private:
     QTabWidget* m_tabWidget = nullptr;
     //входные данные
     mainData* m_data = nullptr;
+
+    //виджет настроек калибровки
+    Calibration* m_calibration = nullptr;
+
     //виджет базы данных
     Database* m_database = nullptr;
+
 
     //отображение состония подключения к приборам
     QLabel *m_status1 = nullptr;//статус подключения QSatusBar

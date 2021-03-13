@@ -19,7 +19,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statusbar->addWidget(m_status2);
 
 
-
     //получение сообщений о состонии подключения в статус бар
     connect(m_controller,SIGNAL(signalStatus1(QString)),this,SLOT(inStatusBar1(QString)));
     connect(m_controller,SIGNAL(signalStatus2(QString)),this,SLOT(inStatusBar2(QString)));
@@ -45,11 +44,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
-
-
-
 void MainWindow::inStatusBar1(const QString & message)
 {
 
@@ -74,8 +68,15 @@ void MainWindow::on_actionNew_triggered()
     ui->menu_Settings_Device->setEnabled(true);
 
     m_tabWidget = new QTabWidget(this);
+
     m_data = new mainData();
     m_tabWidget->addTab(m_data,tr("Data") );
+
+    m_calibration = new Calibration();
+    connect(m_calibration,SIGNAL(setCalibration(const Verification*)),m_controller,SLOT(setVeryfycation(const Verification*)));
+    connect(m_calibration,SIGNAL(signalStartCalibration()),m_controller,SLOT(startCalibration()));
+    m_tabWidget->addTab(m_calibration,tr("Calibration"));
+
     m_database = new Database();
     m_tabWidget->addTab(m_database, tr("Database"));
 
@@ -84,6 +85,8 @@ void MainWindow::on_actionNew_triggered()
     this->setCentralWidget(m_tabWidget);
     this->setLayout(layout);
     this->show();
+    qDebug()<<this->m_tabWidget->currentIndex();
+               //this->m_tabWidget->widget(0)
 }
 
 

@@ -47,8 +47,10 @@ public slots:
     void connectionCal();
     void connectionVol();
 
+
     //____замена процедуры поверки___________//
-    void setVeryfycation(Verification* );
+    void setVeryfycation(const Verification* );
+    void startCalibration();
 
 
 signals:

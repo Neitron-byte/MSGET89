@@ -1,0 +1,40 @@
+#ifndef CALIBRATION_H
+#define CALIBRATION_H
+
+#include <QWidget>
+#include "verification.h"
+
+namespace Ui {
+class Calibration;
+}
+
+class Calibration : public QWidget
+{
+    Q_OBJECT
+    void addItem();
+    void setLenght();
+    void setParametersCalibration();
+
+signals:
+    void setCalibration(const Verification* m_calibration);
+    void signalStartCalibration();
+
+public:
+    explicit Calibration(QWidget *parent = nullptr);
+    ~Calibration();
+
+private slots:
+
+
+    void on_comboBox_calibration_Dev_2_currentIndexChanged(int index);
+
+    void on_pushButton_start_calibration_2_clicked();
+
+private:
+    Ui::Calibration *ui;
+
+    // алгоритм поверки
+    Verification* m_calibration = nullptr;
+};
+
+#endif // CALIBRATION_H

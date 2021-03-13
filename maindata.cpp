@@ -1,4 +1,4 @@
-#include "maindata.h"
+﻿#include "maindata.h"
 #include "ui_maindata.h"
 
 void mainData::SetLenght()
@@ -10,23 +10,12 @@ void mainData::SetLenght()
     ui->lineEdit_full_Name->setMaxLength(10);
     ui->lineEdit_Model_Ver_Device->setMaxLength(5);
     ui->lineEdit_serialNum_Dev->setMaxLength(5);
-}
+    ui->lineEdit_company->setMaxLength(10);
 
-void mainData::addItem()
-{
-    ui->comboBox_calibration_Dev->addItem(tr("None"));
-    ui->comboBox_calibration_Dev->addItem(tr("Converter U"));
-    ui->comboBox_calibration_Dev->addItem(tr("Converter I"));
-
-    ui->comboBox_typeRefDev->addItem(tr("None"));
-    ui->comboBox_typeRefDev->addItem(tr("Line"));
-    ui->comboBox_typeRefDev->addItem(tr("Square"));
-
-    ui->comboBox_typeVerdev->addItem(tr("None"));
-    ui->comboBox_typeVerdev->addItem(tr("Line"));
-    ui->comboBox_typeVerdev->addItem(tr("Square"));
 
 }
+
+
 
 mainData::mainData(QWidget *parent) :
     QWidget(parent),
@@ -45,8 +34,7 @@ mainData::mainData(QWidget *parent) :
     //ограничения на ввод данных
     this->SetLenght();
 
-    //добавление в инетерфейс
-    this->addItem();
+
 }
 
 mainData::~mainData()
@@ -73,7 +61,4 @@ void mainData::timerEvent(QTimerEvent *event)
     slot_set_Date(date.toString(Qt::SystemLocaleLongDate));
 }
 
-void mainData::on_comboBox_calibration_Dev_currentIndexChanged(int index)
-{
 
-}

@@ -25,6 +25,7 @@ SOURCES += \
     Device/hp34420.cpp \
     Device/interfaceconnect.cpp \
     Device/voltmeter.cpp \
+    calibration.cpp \
     controller.cpp \
     database.cpp \
     devicedialog.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     Device/hp34420.h \
     Device/interfaceconnect.h \
     Device/voltmeter.h \
+    calibration.h \
     controller.h \
     database.h \
     devicedialog.h \
@@ -52,6 +54,7 @@ HEADERS += \
     verification.h
 
 FORMS += \
+    calibration.ui \
     database.ui \
     devicedialog.ui \
     dialogsettingscom.ui \
