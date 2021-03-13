@@ -4,12 +4,18 @@
 #include <QObject>
 #include <controller.h>
 #include <QDebug>
+#include <QList>
+#include <QQueue>
+#include <QVector>
 
 //_____________абстрактный базовый класс процедуры поверки ТП___________________________//
 class Verification : public QObject
 {
 
     Q_OBJECT
+
+
+
 public:
     explicit Verification(QObject *parent = nullptr){
         qDebug()<< "Ver Bass create";
@@ -17,11 +23,13 @@ public:
     virtual ~Verification(){
         qDebug()<< "Ver Bass dist";
     }
-    virtual void startVerification(const Calibrator* , const Voltmeter* ) = 0;
+    virtual void startVerification(Calibrator* , Voltmeter* ) = 0;
     void setNumberMeasurement(uint);
     void setCorrect(float);
     void setTypeRef(uint);
     void setTypeCalib(uint);
+
+    void calculation(const QVector<float>&, const QVector<float>&);
 
 signals:
 
@@ -38,6 +46,15 @@ protected:
 
     //тип эталонного преобразователя
     uint m_TypeRefDev = 1;//2 - squa ; 1 - line
+
+    //Результат поверки
+    float m_Rezult = 0;
+
+    //хранение измерений
+    QVector<QVector<float>> m_MeasurementRef;
+    QVector<QVector<float>> m_MeasurementCal;
+
+    QVector<float> m_rezultCalibration;
 
 };
 
@@ -79,7 +96,7 @@ public:
     }
 
 
-    virtual void startVerification(const Calibrator* , const Voltmeter* ) override;
+    virtual void startVerification(Calibrator* , Voltmeter* ) override;
 
 private:
 
@@ -98,7 +115,7 @@ public:
         qDebug()<< "VerU_AC_AC Bass dist";
     }
 
-    virtual void startVerification(const Calibrator* , const Voltmeter* ) override;
+    virtual void startVerification(Calibrator* , Voltmeter* ) override;
 
 };
 

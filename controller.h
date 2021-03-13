@@ -50,6 +50,7 @@ public slots:
 
     //____замена процедуры поверки___________//
     void setVeryfycation(const Verification* );
+    //_______запуск процедуры поверки____________//
     void startCalibration();
 
 

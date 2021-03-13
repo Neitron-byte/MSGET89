@@ -138,5 +138,4 @@ void Controller::setVeryfycation(const Verification * veryfication)
 void Controller::startCalibration()
 {
     m_veryfication->startVerification(m_calibrator,m_voltmeter);
-
 }
