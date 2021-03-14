@@ -23,6 +23,8 @@ public:
     void showDialog();
     virtual void connecting();
     virtual void disconnecting();
+    //получить статус подключения
+    bool getStatusConnect();
 
 protected:
     //интерфейс покдлючения прибора

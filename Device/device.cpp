@@ -51,5 +51,10 @@ void Device::disconnecting()
     m_interfaceConnected->close();
 }
 
+bool Device::getStatusConnect()
+{
+    return is_connect;
+}
+
 
 

@@ -20,16 +20,15 @@ public:
     explicit Verification(QObject *parent = nullptr){
         qDebug()<< "Ver Bass create";
     }
-    virtual ~Verification(){
-        qDebug()<< "Ver Bass dist";
-    }
+    virtual ~Verification();
     virtual void startVerification(Calibrator* , Voltmeter* ) = 0;
     void setNumberMeasurement(uint);
     void setCorrect(float);
     void setTypeRef(uint);
     void setTypeCalib(uint);
-
-    void calculation(const QVector<float>&, const QVector<float>&);
+    bool receiversMeasurement(Voltmeter*,uint,uint);
+    float calculation(uint );
+    void calculationRezult();
 
 signals:
 
@@ -51,10 +50,13 @@ protected:
     float m_Rezult = 0;
 
     //хранение измерений
-    QVector<QVector<float>> m_MeasurementRef;
-    QVector<QVector<float>> m_MeasurementCal;
 
-    QVector<float> m_rezultCalibration;
+    //трехмерный динамиеский массив данных
+    float *** m_arrForMeasurement;
+
+
+    //хранение промежуточных результатов для каждого цикла
+    float * m_arrForRezultForEachIteration;
 
 };
 

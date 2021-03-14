@@ -14,7 +14,7 @@ public:
     HP34420();
     ~HP34420();
     virtual void connecting() override;
-    virtual QByteArray receiveValue(uint ) override;
+    virtual float receiveValue(uint ) override;
 
 };
 

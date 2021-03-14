@@ -23,7 +23,7 @@ void HP34420::connecting()
     }
 }
 
-QByteArray HP34420::receiveValue(uint ch)
+float HP34420::receiveValue(uint ch)
 {
     //Отправка команды на подготовку канала к измерениям
     QString Request = "ROUT:TERM FRON"+QString::number(ch)+"\r\n";
@@ -32,7 +32,7 @@ QByteArray HP34420::receiveValue(uint ch)
         Request = "READ?\r\n";
         if (m_interfaceConnected->write(Request.toLocal8Bit())){
             QByteArray value = m_interfaceConnected->read();
-            return value;
+            return value.toFloat();
         }
     }
 
