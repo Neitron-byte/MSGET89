@@ -7,6 +7,9 @@
 #include <QList>
 #include <QQueue>
 #include <QVector>
+#include <QProgressDialog>
+#include <QThread>
+
 
 //_____________абстрактный базовый класс процедуры поверки ТП___________________________//
 class Verification : public QObject
@@ -19,6 +22,7 @@ class Verification : public QObject
 public:
     explicit Verification(QObject *parent = nullptr){
         qDebug()<< "Ver Bass create";
+
     }
     virtual ~Verification();
     virtual void startVerification(Calibrator* , Voltmeter* ) = 0;
@@ -52,11 +56,14 @@ protected:
     //хранение измерений
 
     //трехмерный динамиеский массив данных
-    float *** m_arrForMeasurement;
-
+    //float *** m_arrForMeasurement;
 
     //хранение промежуточных результатов для каждого цикла
-    float * m_arrForRezultForEachIteration;
+    //float * m_arrForRezultForEachIteration;
+
+    //диалоговое окно прогресса
+    //QProgressDialog* m_pprd = nullptr;
+
 
 };
 

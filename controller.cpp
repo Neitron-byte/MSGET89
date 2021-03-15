@@ -72,6 +72,7 @@ void Controller::createVoltmeter(const enumModelVoltmeter::models& voltmeter)
             }
             m_voltmeter = new HP34420();
             connect(m_voltmeter,SIGNAL(signalStatusDev(QString)),SIGNAL(signalStatus2(QString)));
+
             break;
         default:
 

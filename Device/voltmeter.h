@@ -14,6 +14,9 @@ public:
     virtual ~Voltmeter();
     virtual float receiveValue(uint ) =0;
 
+signals:
+
+
 };
 
 #endif // VOLTMETER_H

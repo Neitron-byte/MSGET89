@@ -14,6 +14,8 @@
 class  ComInterface : public InterfaceConnect
 {
     Q_OBJECT
+
+
 public:
     struct Settings {
         QString name;
@@ -33,14 +35,15 @@ public:
      void close() override;
      //Записать
      bool write(const QByteArray&) override;
-     //Чтение данных
-     QByteArray read() override;
+
      //Показать окно настроек интерфейса подключения прибора
      void showDialog() override;
 
 
 public    slots:
     void handleError(QSerialPort::SerialPortError error);
+    //Чтение данных
+    QByteArray read() override;
 
 signals:
      void signalStatus (const QString&);

@@ -5,6 +5,7 @@
 #include "Device/device.h"
 #include "QDebug"
 #include "Device/voltmeter.h"
+#include <QThread>
 
 class HP34420: public Voltmeter
 

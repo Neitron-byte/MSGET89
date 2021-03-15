@@ -6,6 +6,7 @@
 #include "Device/EnumModelsDevice.h"
 #include "Device/cominterface.h"
 #include <QDebug>
+#include <QThread>
 
 
 
@@ -15,6 +16,7 @@ class Device : public QObject
 
 signals:
     void signalStatusDev(const QString& );
+    void signalData(QByteArray);
 
 public:
     explicit Device(QObject *parent = nullptr);
