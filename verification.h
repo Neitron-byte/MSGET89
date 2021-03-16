@@ -8,7 +8,11 @@
 #include <QQueue>
 #include <QVector>
 #include <QProgressDialog>
+#include <QProgressBar>
 #include <QThread>
+#include <QApplication>
+#include <QMessageBox>
+
 
 
 //_____________абстрактный базовый класс процедуры поверки ТП___________________________//
@@ -30,9 +34,12 @@ public:
     void setCorrect(float);
     void setTypeRef(uint);
     void setTypeCalib(uint);
-    bool receiversMeasurement(Voltmeter*,uint,uint);
+    void receiversMeasurement(Voltmeter*,int,uint);
     float calculation(uint );
     void calculationRezult();
+    void setIncValue();
+    //счетчик для прогресс диалога
+    static int Count;
 
 signals:
 
@@ -56,14 +63,16 @@ protected:
     //хранение измерений
 
     //трехмерный динамиеский массив данных
-    //float *** m_arrForMeasurement;
+    float *** m_arrForMeasurement;
 
     //хранение промежуточных результатов для каждого цикла
-    //float * m_arrForRezultForEachIteration;
+    float * m_arrForRezultForEachIteration;
 
     //диалоговое окно прогресса
-    //QProgressDialog* m_pprd = nullptr;
+    QProgressDialog* m_pprd = nullptr;
 
+    //timeout
+    ulong m_timeOut = 1000;
 
 };
 
