@@ -31,7 +31,7 @@ float HP34420::receiveValue(uint ch)
     if(m_interfaceConnected->write(Request.toLocal8Bit())){
         Request = "READ?\r\n";
         if (m_interfaceConnected->write(Request.toLocal8Bit())){
-            QThread::msleep(100);
+            //QThread::msleep(1000);
             QByteArray value = m_interfaceConnected->read();
             qDebug()<<"Получение данных";
 

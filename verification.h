@@ -72,7 +72,7 @@ protected:
     QProgressDialog* m_pprd = nullptr;
 
     //timeout
-    ulong m_timeOut = 1000;
+    ulong m_timeOut = 3000;
 
 };
 

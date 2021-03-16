@@ -61,10 +61,15 @@ bool ComInterface::write(const QByteArray& array)
 QByteArray ComInterface::read()
 {
     if(is_Open){
-        QByteArray responseData;
+        QByteArray responseData = 0;
         if(m_serial->waitForReadyRead(3000)){
             responseData = m_serial->readAll();
+        } else {
+            this->close();
+            this->open();
+            responseData = m_serial->readAll();
         }
+
         //qDebug()<<responseData.toFloat();
         return responseData;
     }

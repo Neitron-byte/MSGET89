@@ -125,7 +125,8 @@ void Verification_U_DC_AC::startVerification(Calibrator * calibrator, Voltmeter 
                         QMessageBox::Information,
                         QMessageBox::Yes,
                         QMessageBox::No,
-                        QMessageBox::Cancel | QMessageBox::Escape);
+                        0
+                        );
     int n = pmbx->exec();
     delete pmbx;
     if (n == QMessageBox::Yes)
@@ -151,21 +152,21 @@ void Verification_U_AC_AC::startVerification(Calibrator * calibrator, Voltmeter 
 float Verification::calculation(uint iteration)
 {
     //рассчет погрешности для эталона
-    float averageRefDC = (m_arrForMeasurement[1][iteration][2] + m_arrForMeasurement[1][iteration][3])/2;
-    float averageRefAC = (m_arrForMeasurement[1][iteration][1] + m_arrForMeasurement[1][iteration][4])/2;
+    float averageRefDC = (m_arrForMeasurement[0][iteration][1] + m_arrForMeasurement[0][iteration][2])/2;
+    float averageRefAC = (m_arrForMeasurement[0][iteration][0] + m_arrForMeasurement[0][iteration][3])/2;
     float deltaRef = (averageRefAC - averageRefDC)/ (m_TypeRefDev * averageRefDC);
 
     //рассчет погрешности для поверяемого прибора
 
-    float averageDC = (m_arrForMeasurement[2][iteration][2] + m_arrForMeasurement[2][iteration][3])/2;
-    float averageAC = (m_arrForMeasurement[2][iteration][1] + m_arrForMeasurement[2][iteration][4])/2;
+    float averageDC = (m_arrForMeasurement[1][iteration][1] + m_arrForMeasurement[1][iteration][2])/2;
+    float averageAC = (m_arrForMeasurement[1][iteration][0] + m_arrForMeasurement[1][iteration][3])/2;
 
     float deltaVer = (averageAC - averageDC)/ (m_TypeCalDev * averageDC);
 
     //разность погрешностей
 
     float RezultDelta = deltaVer - deltaRef;
-
+    qDebug() << "Промежуточный результат Итерации " << iteration <<" " << RezultDelta;
     m_arrForRezultForEachIteration[iteration] = RezultDelta;
 }
 
@@ -178,6 +179,7 @@ void Verification::calculationRezult()
     }
 
         m_Rezult = Summ/m_numberMeasurements + m_correctRef;
+        qDebug() << "Результат Поверки: " << m_Rezult;
 }
 
 void Verification::setIncValue()
@@ -198,9 +200,7 @@ Verification::~Verification()
 
     delete[] m_arrForRezultForEachIteration;
 
-    if(m_pprd){
-        delete m_pprd;
-    }
+
 }
 
 void Verification::setNumberMeasurement(uint number)
@@ -230,17 +230,17 @@ void Verification::receiversMeasurement(Voltmeter * voltmeter, int iteration, ui
     m_pprd->setLabelText(tr("receive data CH1"));
     float val1 = voltmeter->receiveValue(1);
     if(val1 == 0) return;
-    m_arrForMeasurement[1][iteration][counter] = val1;
+    m_arrForMeasurement[0][iteration][counter] = val1;
     this->setIncValue();
    qDebug()<<"1 канал" << val1;
-    QThread::msleep(m_timeOut);
+   QThread::msleep(m_timeOut);
 
     m_pprd->setLabelText(tr("receive data CH2"));
     float val2 = voltmeter->receiveValue(2);
     if(val2 == 0) return;
     qDebug()<<"Cохранение";
-     m_arrForMeasurement[2][iteration][counter] = val2;
-      qDebug()<<"Cохранение2";
+     m_arrForMeasurement[1][iteration][counter] = val2;
+
      this->setIncValue();
     qDebug()<<"2 канал" << val2;
 
