@@ -20,43 +20,9 @@ void Verification_U_DC_AC::startVerification(Calibrator * calibrator, Voltmeter 
 
 
 
-        //подготовка массива для показаний
-        m_arrForRezultForEachIteration = new float [m_numberMeasurements];
+        preparingAnArray();
 
-        for (int i = 0; i < m_numberMeasurements; ++i) {
-            m_arrForRezultForEachIteration[i] = 0;
-        }
-
-        //подготовка массива для приёма данных
-        m_arrForMeasurement = new float**[2];
-
-        for (int i = 0; i < 2; ++i) {
-            m_arrForMeasurement[i] = new float* [m_numberMeasurements];
-            for (int j = 0; j < m_numberMeasurements; ++j) {
-                m_arrForMeasurement[i][j] = new float [4];
-            }
-        }
-
-
-        for (int i = 0; i < 2; ++i) {
-            for (int j = 0; j < m_numberMeasurements; ++j) {
-                for (int k = 0; k < 4; ++k) {
-                    m_arrForMeasurement[i][j][k] = 0;
-                }
-
-            }
-        }
-
-        for (int i = 0; i < 2; ++i) {
-            for (int j = 0; j < m_numberMeasurements; ++j) {
-                for (int k = 0; k < 4; ++k) {
-                    qDebug() << m_arrForMeasurement[i][j][k];
-                }
-
-            }
-        }
-
-        //инициализация диалогового окна прогресса
+         //инициализация диалогового окна прогресса
         int max = m_numberMeasurements*12;
 
         m_pprd = new QProgressDialog(tr("Start calibration"),0,0,max);
@@ -132,6 +98,8 @@ void Verification_U_DC_AC::startVerification(Calibrator * calibrator, Voltmeter 
     if (n == QMessageBox::Yes)
     {
       //Нажата кнопка Yes
+        print();
+
     }
 
         }
@@ -186,6 +154,54 @@ void Verification::setIncValue()
 {
     ++Count;
     m_pprd->setValue(Count);
+}
+
+void Verification::preparingAnArray()
+{
+    //подготовка массива для показаний
+    m_arrForRezultForEachIteration = new float [m_numberMeasurements];
+
+    for (int i = 0; i < m_numberMeasurements; ++i) {
+        m_arrForRezultForEachIteration[i] = 0;
+    }
+
+    //подготовка массива для приёма данных
+    m_arrForMeasurement = new float**[2];
+
+    for (int i = 0; i < 2; ++i) {
+        m_arrForMeasurement[i] = new float* [m_numberMeasurements];
+        for (int j = 0; j < m_numberMeasurements; ++j) {
+            m_arrForMeasurement[i][j] = new float [4];
+        }
+    }
+
+
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < m_numberMeasurements; ++j) {
+            for (int k = 0; k < 4; ++k) {
+                m_arrForMeasurement[i][j][k] = 0;
+            }
+
+        }
+    }
+
+
+}
+
+void Verification::print()
+{
+    std::cout << "Rezults measurement: " << std::endl;
+    for (int j = 0; j < m_numberMeasurements; ++j) {
+
+        for (int i = 0; i < 4; ++i) {
+            for (int k = 0; k < 2; ++k) {
+                std::cout << m_arrForMeasurement[k][j][i];
+            }
+            std::cout << std::endl;
+        }
+        std::cout << "Rezult" << m_arrForRezultForEachIteration[j] << std::endl;
+
+    }
 }
 
 Verification::~Verification()
@@ -251,4 +267,9 @@ void Verification_U::setVoltage(float volt)
 
         m_Voltage = volt;
 
+}
+
+void Verification_U::setFrequency(uint freq)
+{
+    m_Frequency = freq;
 }

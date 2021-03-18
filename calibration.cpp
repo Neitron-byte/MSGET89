@@ -22,6 +22,9 @@ void Calibration::setLenght()
     ui->spinBox_number_meas_2->setMaximum(10);
     ui->spinBox_number_meas_2->setSingleStep(1);
 
+    ui->spinBox_freq->setMinimum(1);
+    ui->spinBox_freq->setMaximum(100);
+    ui->spinBox_freq->setSingleStep(1);
 
    ui->doubleSpinBox_correct->setMinimum(0);
    ui->doubleSpinBox_correct->setMaximum(10);
@@ -43,7 +46,9 @@ void Calibration::setParametersCalibration()
         Verification_U* pVer = dynamic_cast<Verification_U*>(m_calibration);
         if(pVer){
             pVer->setVoltage(ui->doubleSpinBox_voltage->value());
+            pVer->setFrequency(ui->spinBox_freq->value());
         }
+
 
         if(ui->checkBox_ref_square->isChecked()){
             m_calibration->setTypeRef(2);
@@ -56,6 +61,8 @@ void Calibration::setParametersCalibration()
         } else {
             m_calibration->setTypeCalib(1);
         }
+
+
     }
 }
 
@@ -69,6 +76,10 @@ Calibration::Calibration(QWidget *parent) :
     this->addItem();
 
     this->setLenght();
+
+
+
+
 
 }
 
@@ -84,10 +95,14 @@ void Calibration::on_comboBox_calibration_Dev_2_currentIndexChanged(int index)
     if (index == 1){
 
         m_calibration = new Verification_U_DC_AC();
+        ui->label_freq->setEnabled(false);
+        ui->spinBox_freq->setEnabled(false);
     }
     if (index == 2 ){
 
         m_calibration = new Verification_U_AC_AC();
+        ui->label_freq->setEnabled(true);
+        ui->spinBox_freq->setEnabled(true);
     }
     if (index){
     emit setCalibration(m_calibration);

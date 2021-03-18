@@ -74,6 +74,10 @@
    </property>
   </action>
   <action name="action_Connecting">
+   <property name="icon">
+    <iconset resource="Files.qrc">
+     <normaloff>:/Images/settings.png</normaloff>:/Images/settings.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Device</string>
    </property>

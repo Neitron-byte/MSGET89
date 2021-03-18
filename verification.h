@@ -12,6 +12,7 @@
 #include <QThread>
 #include <QApplication>
 #include <QMessageBox>
+#include <iostream>
 
 
 
@@ -40,6 +41,9 @@ public:
     void setIncValue();
     //счетчик для прогресс диалога
     static int Count;
+    //подготовка массива
+    void preparingAnArray();
+    void print();
 
 signals:
 
@@ -74,6 +78,8 @@ protected:
     //timeout
     ulong m_timeOut = 3000;
 
+
+
 };
 
 
@@ -91,11 +97,13 @@ public:
 
 public:
     void setVoltage(float);
+    void setFrequency(uint);
 
 protected:
     //Номинальное напряжение, на которое рассчитан преобразователь
     float m_Voltage =0;
-
+    // Частота
+    uint m_Frequency = 0;
 };
 
 

@@ -62,3 +62,13 @@ void mainData::timerEvent(QTimerEvent *event)
 }
 
 
+
+void mainData::on_pushButton_start_calibration_clicked()
+{
+//    QAxObject* pword = new QAxObject("Word.Application");
+//    QAxObject* pdoc = pword->querySubObject("Documents");
+//    pdoc = pdoc->querySubObject("add()");
+
+//    pword->setProperty("Visible",true);
+
+}

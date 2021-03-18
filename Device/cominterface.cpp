@@ -11,6 +11,7 @@ ComInterface::ComInterface()
 ComInterface::~ComInterface()
 {
     qDebug()<<"Distructor COM";
+    if (m_serial->isOpen()) m_serial->close();
 }
 
 bool ComInterface::open()

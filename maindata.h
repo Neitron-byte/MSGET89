@@ -5,6 +5,7 @@
 #include <QDate>
 #include <QTime>
 #include <QTimer>
+#include <QAxObject>
 
 
 
@@ -37,11 +38,15 @@ private:
     QTime time;
     QDate date;
 
+    //
+
 
     // QObject interface
 protected:
     virtual void timerEvent(QTimerEvent *event);
 
+private slots:
+    void on_pushButton_start_calibration_clicked();
 };
 
 #endif // MAINDATA_H
