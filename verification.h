@@ -40,6 +40,7 @@ public:
     void calculationRezult();
     void setIncValue();
 
+
     //счетчик для прогресс диалога
     static int Count;
 
@@ -53,7 +54,8 @@ public:
     //void print();
 
 signals:
-
+    //сигнал для консоли
+    void signalToConsole(const QByteArray&);
 
 protected:
     //поправка на эталон

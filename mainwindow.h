@@ -11,8 +11,9 @@
 #include "database.h"
 #include "controller.h"
 #include "calibration.h"
+#include "console.h"
 
-
+class Console;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -59,6 +60,8 @@ private:
     // Контроллер управления приборами
     Controller* m_controller = nullptr;
 
+    //Консоль вывода
+    Console* m_console = nullptr;
 
 
 };

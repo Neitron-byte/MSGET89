@@ -18,10 +18,12 @@ class Calibration : public QWidget
 signals:
     void setCalibration(const Verification* m_calibration);
     void signalStartCalibration();
+    void signalForConsole(const QByteArray&);
 
 public:
     explicit Calibration(QWidget *parent = nullptr);
     ~Calibration();
+    //const Verification* getCalibration();
 
 private slots:
 

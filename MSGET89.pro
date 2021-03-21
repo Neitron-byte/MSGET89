@@ -26,6 +26,7 @@ SOURCES += \
     Device/interfaceconnect.cpp \
     Device/voltmeter.cpp \
     calibration.cpp \
+    console.cpp \
     controller.cpp \
     database.cpp \
     devicedialog.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
     Device/interfaceconnect.h \
     Device/voltmeter.h \
     calibration.h \
+    console.h \
     controller.h \
     database.h \
     devicedialog.h \

@@ -23,8 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_controller,SIGNAL(signalStatus1(QString)),this,SLOT(inStatusBar1(QString)));
     connect(m_controller,SIGNAL(signalStatus2(QString)),this,SLOT(inStatusBar2(QString)));
 
-
-
 }
 
 MainWindow::~MainWindow()
@@ -38,6 +36,14 @@ MainWindow::~MainWindow()
     if(m_data){
         delete m_data;
     }
+
+    if(m_console){
+        delete m_console;
+    }
+    if(m_calibration){
+        delete m_calibration;
+    }
+
     if (m_tabWidget){
         delete m_tabWidget;
     }
@@ -69,14 +75,26 @@ void MainWindow::on_actionNew_triggered()
 
     m_tabWidget = new QTabWidget(this);
 
+    //вкладка ввода общих данных
     m_data = new mainData();
     m_tabWidget->addTab(m_data,tr("Data") );
 
+
+    //вкладка настроек поверки
     m_calibration = new Calibration();
     connect(m_calibration,SIGNAL(setCalibration(const Verification*)),m_controller,SLOT(setVeryfycation(const Verification*)));
     connect(m_calibration,SIGNAL(signalStartCalibration()),m_controller,SLOT(startCalibration()));
-    m_tabWidget->addTab(m_calibration,tr("Calibration"));
+   m_tabWidget->addTab(m_calibration,tr("Calibration"));
 
+    //вкладка вывода на консоль
+    m_console = new Console();
+    m_tabWidget->addTab(m_console,tr("Console"));
+
+    //вывод значений
+    connect(m_calibration,SIGNAL(signalForConsole(QByteArray)),m_console,SLOT(putData(QByteArray)));
+    connect(m_data,SIGNAL(signalFromMainToConsole(QByteArray)),m_console,SLOT(putData(QByteArray)));
+
+    //вкладка базы данных
     m_database = new Database();
     m_tabWidget->addTab(m_database, tr("Database"));
 

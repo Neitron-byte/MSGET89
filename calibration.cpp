@@ -90,6 +90,11 @@ Calibration::~Calibration()
     delete ui;
 }
 
+//const Verification *Calibration::getCalibration()
+//{
+//    return m_calibration;
+//}
+
 
 void Calibration::on_comboBox_calibration_Dev_2_currentIndexChanged(int index)
 {
@@ -98,16 +103,22 @@ void Calibration::on_comboBox_calibration_Dev_2_currentIndexChanged(int index)
         m_calibration = new Verification_U_DC_AC();
         ui->label_freq->setEnabled(false);
         ui->spinBox_freq->setEnabled(false);
+        connect(m_calibration,SIGNAL(signalToConsole(QByteArray)),SIGNAL(signalForConsole(QByteArray)));
+
+
     }
     if (index == 2 ){
 
         m_calibration = new Verification_U_AC_AC();
         ui->label_freq->setEnabled(true);
         ui->spinBox_freq->setEnabled(true);
+        connect(m_calibration,SIGNAL(signalToConsole(QByteArray)),SIGNAL(signalForConsole(QByteArray)));
+
     }
     if (index){
     emit setCalibration(m_calibration);
     }
+
 }
 
 void Calibration::on_pushButton_start_calibration_2_clicked()

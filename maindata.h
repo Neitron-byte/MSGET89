@@ -38,7 +38,9 @@ private:
     QTime time;
     QDate date;
 
-    //
+signals:
+    void signalFromMainToConsole(const QByteArray&);
+
 
 
     // QObject interface
