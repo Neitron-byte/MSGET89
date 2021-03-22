@@ -19,6 +19,11 @@ signals:
     void setCalibration(const Verification* m_calibration);
     void signalStartCalibration();
     void signalForConsole(const QByteArray&);
+    void showConsole();
+    void saveRezult(float);
+    void signalSetTypeVer(int);
+    void signalSetVolt(float);
+    void signalPrint();
 
 public:
     explicit Calibration(QWidget *parent = nullptr);
@@ -31,6 +36,8 @@ private slots:
     void on_comboBox_calibration_Dev_2_currentIndexChanged(int index);
 
     void on_pushButton_start_calibration_2_clicked();
+
+    void on_pushButton_print_clicked();
 
 private:
     Ui::Calibration *ui;

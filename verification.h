@@ -56,6 +56,7 @@ public:
 signals:
     //сигнал для консоли
     void signalToConsole(const QByteArray&);
+    void rezultSave(float);
 
 protected:
     //поправка на эталон
@@ -70,24 +71,20 @@ protected:
     //тип эталонного преобразователя
     uint m_TypeRefDev = 1;//2 - squa ; 1 - line
 
-//    //Результат поверки
-//    float m_Rezult = 0;
-
     //хранение измерений
+    float m_rezult = 0;
 
     //трехмерный динамиеский массив данных
-    float *** m_arrForMeasurement;
+    float *** m_arrForMeasurement = nullptr;
 
     //хранение промежуточных результатов для каждого цикла
-    QVector<float>* m_arrForRezultForEachIteration;
+    float* m_arrForRezultForEachIteration = nullptr;
 
     //диалоговое окно прогресса
     QProgressDialog* m_pprd = nullptr;
 
     //timeout
     ulong m_timeOut = 3000;
-
-
 
 };
 

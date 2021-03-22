@@ -13,6 +13,7 @@
 #include "calibration.h"
 #include "console.h"
 
+
 class Console;
 
 QT_BEGIN_NAMESPACE
@@ -26,6 +27,8 @@ private slots:
 
     void on_action_Connecting_triggered();
     void on_actionNew_triggered();
+    void showConsole();
+
 
 
 public:

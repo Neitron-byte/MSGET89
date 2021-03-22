@@ -24,9 +24,15 @@ class mainData : public QWidget
 public:
     explicit mainData(QWidget *parent = nullptr);
     ~mainData();
+
+
 public slots:
     void slot_set_Time(const QString);
     void slot_set_Date(const QString);
+    void addRezulttoVector(float);
+    void addTypetoVector(int);
+    void setVoltage(float);
+    void print();
 
 
 private:
@@ -37,6 +43,22 @@ private:
     int m_idTimer = 0;
     QTime time;
     QDate date;
+
+    //общие данные
+    float m_temp = 0;
+    QString m_fullName = 0;
+    QString m_model = 0;
+    QString m_serialNum = 0;
+    QString m_company =0;
+    //Напряжение на которое рассчитан преобразователь
+    float m_voltage = 0;
+
+    //результаты поверки
+    QVector<float> m_vectorRezultVal;
+    //тип поверки
+    QVector<int> m_vectorTypeVer;
+
+    static uint m_counterNumVerification;
 
 signals:
     void signalFromMainToConsole(const QByteArray&);

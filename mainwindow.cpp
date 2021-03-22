@@ -84,7 +84,14 @@ void MainWindow::on_actionNew_triggered()
     m_calibration = new Calibration();
     connect(m_calibration,SIGNAL(setCalibration(const Verification*)),m_controller,SLOT(setVeryfycation(const Verification*)));
     connect(m_calibration,SIGNAL(signalStartCalibration()),m_controller,SLOT(startCalibration()));
-   m_tabWidget->addTab(m_calibration,tr("Calibration"));
+    connect(m_calibration,SIGNAL(showConsole()),this,SLOT(showConsole()));
+    //cохранение результата
+    connect(m_calibration,SIGNAL(saveRezult(float)),m_data,SLOT(addRezulttoVector(float)));
+    connect(m_calibration,SIGNAL(signalSetTypeVer(int)),m_data,SLOT(addTypetoVector(int)));
+    connect(m_calibration,SIGNAL(signalSetVolt(float)),m_data,SLOT(setVoltage(float)));
+    connect(m_calibration,SIGNAL(signalPrint()),m_data,SLOT(print()));
+
+    m_tabWidget->addTab(m_calibration,tr("Calibration"));
 
     //вкладка вывода на консоль
     m_console = new Console();
@@ -93,6 +100,8 @@ void MainWindow::on_actionNew_triggered()
     //вывод значений
     connect(m_calibration,SIGNAL(signalForConsole(QByteArray)),m_console,SLOT(putData(QByteArray)));
     connect(m_data,SIGNAL(signalFromMainToConsole(QByteArray)),m_console,SLOT(putData(QByteArray)));
+
+
 
     //вкладка базы данных
     m_database = new Database();
@@ -104,7 +113,13 @@ void MainWindow::on_actionNew_triggered()
     this->setLayout(layout);
     this->show();
     qDebug()<<this->m_tabWidget->currentIndex();
-               //this->m_tabWidget->widget(0)
+    //this->m_tabWidget->widget(0)
 }
+
+void MainWindow::showConsole()
+{
+    m_tabWidget->setCurrentIndex(2);
+}
+
 
 

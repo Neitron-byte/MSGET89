@@ -18,11 +18,11 @@ void Calibration::setLenght()
     ui->doubleSpinBox_voltage->setMaximum(100);
     ui->doubleSpinBox_voltage->setSingleStep(0.1);
 
-    ui->spinBox_number_meas_2->setMinimum(3);
+    ui->spinBox_number_meas_2->setMinimum(1);
     ui->spinBox_number_meas_2->setMaximum(10);
     ui->spinBox_number_meas_2->setSingleStep(1);
 
-    ui->spinBox_freq->setMinimum(1);
+    ui->spinBox_freq->setMinimum(0);
     ui->spinBox_freq->setMaximum(100);
     ui->spinBox_freq->setSingleStep(1);
 
@@ -103,7 +103,6 @@ void Calibration::on_comboBox_calibration_Dev_2_currentIndexChanged(int index)
         m_calibration = new Verification_U_DC_AC();
         ui->label_freq->setEnabled(false);
         ui->spinBox_freq->setEnabled(false);
-        connect(m_calibration,SIGNAL(signalToConsole(QByteArray)),SIGNAL(signalForConsole(QByteArray)));
 
 
     }
@@ -112,10 +111,13 @@ void Calibration::on_comboBox_calibration_Dev_2_currentIndexChanged(int index)
         m_calibration = new Verification_U_AC_AC();
         ui->label_freq->setEnabled(true);
         ui->spinBox_freq->setEnabled(true);
-        connect(m_calibration,SIGNAL(signalToConsole(QByteArray)),SIGNAL(signalForConsole(QByteArray)));
+
 
     }
     if (index){
+        connect(m_calibration,SIGNAL(signalToConsole(QByteArray)),SIGNAL(signalForConsole(QByteArray)));
+        connect(m_calibration,SIGNAL(rezultSave(float)),SIGNAL(saveRezult(float)));
+
     emit setCalibration(m_calibration);
     }
 
@@ -124,7 +126,15 @@ void Calibration::on_comboBox_calibration_Dev_2_currentIndexChanged(int index)
 void Calibration::on_pushButton_start_calibration_2_clicked()
 {
     if(ui->comboBox_calibration_Dev_2->currentIndex()){
+    emit signalSetTypeVer(ui->spinBox_freq->value());
     this->setParametersCalibration();
+    emit showConsole();
     emit signalStartCalibration();
     }
+}
+
+void Calibration::on_pushButton_print_clicked()
+{
+    emit signalSetVolt(ui->doubleSpinBox_voltage->value());
+    emit signalPrint();
 }

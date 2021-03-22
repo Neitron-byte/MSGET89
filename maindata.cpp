@@ -1,6 +1,8 @@
 ﻿#include "maindata.h"
 #include "ui_maindata.h"
 
+uint mainData::m_counterNumVerification = 0;
+
 void mainData::SetLenght()
 {
     ui->doubleSpinBox_temp->setValue(20);
@@ -53,6 +55,35 @@ void mainData::slot_set_Date(const QString strDate)
     ui->label_Date->setText(strDate);
 }
 
+void mainData::addRezulttoVector(float val)
+{
+    m_vectorRezultVal.push_back(val);
+
+    m_counterNumVerification++;
+}
+
+void mainData::addTypetoVector(int freq)
+{
+    m_vectorTypeVer.push_back(freq);
+}
+
+void mainData::setVoltage(float volt)
+{
+    m_voltage = volt;
+}
+
+void mainData::print()
+{
+        if(!m_vectorRezultVal.isEmpty()){
+        QAxObject* pword = new QAxObject("Word.Application");
+        QAxObject* pdoc = pword->querySubObject("Documents");
+        pdoc = pdoc->querySubObject("add()");
+
+        pword->setProperty("Visible",true);
+
+          }
+}
+
 
 void mainData::timerEvent(QTimerEvent *event)
 {
@@ -66,16 +97,15 @@ void mainData::timerEvent(QTimerEvent *event)
 
 void mainData::on_pushButton_start_calibration_clicked()
 {
-//    QAxObject* pword = new QAxObject("Word.Application");
-//    QAxObject* pdoc = pword->querySubObject("Documents");
-//    pdoc = pdoc->querySubObject("add()");
 
-//    pword->setProperty("Visible",true);
-      //float val = ui->doubleSpinBox_temp->value();
-      //QByteArray array(reinterpret_cast<const char*>(&val), sizeof(val));
-      emit signalFromMainToConsole(("Temperature: "+QString::number(ui->doubleSpinBox_temp->value())).toLocal8Bit());
-      emit signalFromMainToConsole(("Full name: "+ui->lineEdit_full_Name->text()).toLocal8Bit());
-      emit signalFromMainToConsole(("Model: "+ ui->lineEdit_Model_Ver_Device->text()).toLocal8Bit());
-      emit signalFromMainToConsole(("Serial number"+ui->lineEdit_serialNum_Dev->text()).toLocal8Bit());
-      emit signalFromMainToConsole(("Company: "+ui->lineEdit_company->text()).toLocal8Bit());
+      m_temp = ui->doubleSpinBox_temp->value();
+      m_fullName = ui->lineEdit_full_Name->text();
+      m_model = ui->lineEdit_Model_Ver_Device->text();
+      m_serialNum = ui->lineEdit_serialNum_Dev->text();
+      m_company = ui->lineEdit_company->text();
+      emit signalFromMainToConsole(("Temperature: "+QString::number(m_temp)).toLocal8Bit());
+      emit signalFromMainToConsole(("Full name: " + m_fullName).toLocal8Bit());
+      emit signalFromMainToConsole(("Model: "+ m_model).toLocal8Bit());
+      emit signalFromMainToConsole(("Serial number" + m_serialNum).toLocal8Bit());
+      emit signalFromMainToConsole(("Company: " + m_company).toLocal8Bit());
 }
