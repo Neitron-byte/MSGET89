@@ -74,14 +74,87 @@ void mainData::setVoltage(float volt)
 
 void mainData::print()
 {
-        if(!m_vectorRezultVal.isEmpty()){
+        //if(!m_vectorRezultVal.isEmpty()){
         QAxObject* pword = new QAxObject("Word.Application");
         QAxObject* pdoc = pword->querySubObject("Documents");
-        pdoc = pdoc->querySubObject("add()");
+        pdoc = pdoc->querySubObject("Add()");
+
+//        QAxObject* pFont = pword->querySubObject("Font");
+//        pFont->setProperty("Size",14);
+
+        QAxObject* prange = pdoc->querySubObject("Range()");
+        prange->dynamicCall("SetRange(int,int)",0,100);
+        prange->setProperty("Text",tr("Protocol verification"));
+        QAxObject* pFont = prange->querySubObject("Font");
+        pFont->setProperty("Size",14);
+        pFont->setProperty("Name", "Times New Roman");
+
+        QAxObject *alignment_range = prange->querySubObject("ParagraphFormat");
+           alignment_range->setProperty("Alignment", "wdAlignParagraphCenter");
+           alignment_range->setProperty("SpaceAfter", 0);
+
+        prange->dynamicCall("InsertParagraphAfter()");
+        prange->dynamicCall("InsertParagraphAfter()");
+
+        prange = pdoc->querySubObject("Range()");
+        prange->dynamicCall("SetRange(int,int)",101,200);
+        prange->setProperty("Text",tr("Time: ")+time.toString(Qt::SystemLocaleLongDate));
+
+        alignment_range = prange->querySubObject("ParagraphFormat");
+        alignment_range->setProperty("Alignment", "wdAlignParagraphLeft");
+        alignment_range->setProperty("SpaceAfter", 0);
+
+
+        prange = pdoc->querySubObject("Range()");
+        prange->dynamicCall("SetRange(int,int)",201,300);
+        prange->setProperty("Text","              ");
+
+        prange = pdoc->querySubObject("Range()");
+        prange->dynamicCall("SetRange(int,int)",201,300);
+        prange->setProperty("Text",tr("Date: ")+date.toString(Qt::SystemLocaleLongDate));
+
+        prange->dynamicCall("InsertParagraphAfter()");
+        prange = pdoc->querySubObject("Range()");
+        prange->dynamicCall("SetRange(int,int)",201,300);
+        prange->setProperty("Text",tr("Temperature: ")+ QString::number(m_temp));
+
+        prange->dynamicCall("InsertParagraphAfter()");
+        prange = pdoc->querySubObject("Range()");
+        prange->dynamicCall("SetRange(int,int)",201,300);
+        prange->setProperty("Text",tr("Full name: ")+ m_fullName);
+
+        prange->dynamicCall("InsertParagraphAfter()");
+        prange = pdoc->querySubObject("Range()");
+        prange->dynamicCall("SetRange(int,int)",201,300);
+        prange->setProperty("Text",tr("Model: ")+ m_model);
+
+        prange->dynamicCall("InsertParagraphAfter()");
+        prange = pdoc->querySubObject("Range()");
+        prange->dynamicCall("SetRange(int,int)",201,300);
+        prange->setProperty("Text",tr("Serial number: ")+ m_serialNum);
+
+        prange->dynamicCall("InsertParagraphAfter()");
+        prange = pdoc->querySubObject("Range()");
+        prange->dynamicCall("SetRange(int,int)",201,300);
+        prange->setProperty("Text",tr("Company: ")+ m_company);
+        prange->dynamicCall("InsertParagraphAfter()");
+
+        for (int i = 0; i < m_vectorRezultVal.size(); ++i) {
+            qDebug()<<m_vectorRezultVal.size();
+            prange = pdoc->querySubObject("Range()");
+            prange->dynamicCall("SetRange(int,int)",201,300);
+            if(m_vectorTypeVer[i] == 0){
+                prange->setProperty("Text",tr("DC-AC: ")+ QString::number(m_vectorRezultVal[i]));
+            } else {
+                prange->setProperty("Text",tr("AC-AC: ")+ QString::number(m_vectorRezultVal[i]));
+            }
+
+            prange->dynamicCall("InsertParagraphAfter()");
+        }
 
         pword->setProperty("Visible",true);
 
-          }
+          //}
 }
 
 
@@ -103,9 +176,9 @@ void mainData::on_pushButton_start_calibration_clicked()
       m_model = ui->lineEdit_Model_Ver_Device->text();
       m_serialNum = ui->lineEdit_serialNum_Dev->text();
       m_company = ui->lineEdit_company->text();
-      emit signalFromMainToConsole(("Temperature: "+QString::number(m_temp)).toLocal8Bit());
-      emit signalFromMainToConsole(("Full name: " + m_fullName).toLocal8Bit());
-      emit signalFromMainToConsole(("Model: "+ m_model).toLocal8Bit());
-      emit signalFromMainToConsole(("Serial number" + m_serialNum).toLocal8Bit());
-      emit signalFromMainToConsole(("Company: " + m_company).toLocal8Bit());
+      emit signalFromMainToConsole((tr("Temperature: ")+QString::number(m_temp)).toLocal8Bit());
+      emit signalFromMainToConsole((tr("Full name: ") + m_fullName).toLocal8Bit());
+      emit signalFromMainToConsole((tr("Model: ")+ m_model).toLocal8Bit());
+      emit signalFromMainToConsole((tr("Serial number") + m_serialNum).toLocal8Bit());
+      emit signalFromMainToConsole((tr("Company: ") + m_company).toLocal8Bit());
 }
