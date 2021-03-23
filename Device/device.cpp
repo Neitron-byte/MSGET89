@@ -22,7 +22,7 @@ void Device::creatInterface(const enumTypeConnection::type& type)
         }
         m_interfaceConnected = new ComInterface();
         connect(m_interfaceConnected,SIGNAL(signalStatus(const QString&)), SIGNAL(signalStatusDev(const QString&)));
-        connect(m_interfaceConnected,SIGNAL(signalData(QByteArray)),this,SLOT());
+
         break;
     default:
         break;

@@ -28,6 +28,7 @@ SOURCES += \
     calibration.cpp \
     console.cpp \
     controller.cpp \
+    data.cpp \
     database.cpp \
     devicedialog.cpp \
     dialogsettingscom.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
     calibration.h \
     console.h \
     controller.h \
+    data.h \
     database.h \
     devicedialog.h \
     dialogsettingscom.h \

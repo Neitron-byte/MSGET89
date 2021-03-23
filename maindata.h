@@ -6,8 +6,8 @@
 #include <QTime>
 #include <QTimer>
 #include <QAxObject>
-
-
+#include <QDebug>
+#include <data.h>
 
 
 
@@ -29,10 +29,6 @@ public:
 public slots:
     void slot_set_Time(const QString);
     void slot_set_Date(const QString);
-    void addRezulttoVector(float);
-    void addTypetoVector(int);
-    void setVoltage(float);
-    void print();
 
 
 private:
@@ -44,24 +40,6 @@ private:
     QTime time;
     QDate date;
 
-    //общие данные
-    float m_temp = 0;
-    QString m_fullName = 0;
-    QString m_model = 0;
-    QString m_serialNum = 0;
-    QString m_company =0;
-    //Напряжение на которое рассчитан преобразователь
-    float m_voltage = 0;
-
-    //результаты поверки
-    QVector<float> m_vectorRezultVal;
-    //тип поверки
-    QVector<int> m_vectorTypeVer;
-
-    static uint m_counterNumVerification;
-
-signals:
-    void signalFromMainToConsole(const QByteArray&);
 
 
 

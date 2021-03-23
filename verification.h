@@ -13,6 +13,7 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <iostream>
+#include "data.h"
 
 
 
@@ -51,12 +52,8 @@ public:
     //интерфейс для промежуточного рассчета для каждой итерации
     virtual void calculation(uint ) = 0;
 
-    //void print();
+    void saveRezult();
 
-signals:
-    //сигнал для консоли
-    void signalToConsole(const QByteArray&);
-    void rezultSave(float);
 
 protected:
     //поправка на эталон

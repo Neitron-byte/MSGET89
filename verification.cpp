@@ -33,12 +33,12 @@ void Verification_U_DC_AC::startVerification(Calibrator * calibrator, Voltmeter 
 
         for (uint i = 0; i < m_numberMeasurements; ++i) {
 
-            emit signalToConsole(tr("Verification - iteration %1").arg(i).toLocal8Bit());
+
 
             uint Counter = 0;
             qDebug() << "Цикл " << i;
             m_pprd->setLabelText(tr("Set AC U: %1 V F: 1kHz").arg(m_Voltage));
-            emit signalToConsole(tr("Set AC U: %1 V F: 1kHz").arg(m_Voltage).toLocal8Bit());
+
             if (calibrator->setFreqValue(m_Voltage,1)){
                this->setIncValue();
                 QThread::msleep(m_timeOut);
@@ -52,7 +52,7 @@ void Verification_U_DC_AC::startVerification(Calibrator * calibrator, Voltmeter 
 
             Counter++;
             m_pprd->setLabelText(tr("Set DC +U: %1 V").arg(m_Voltage));
-             emit signalToConsole(tr("Set DC +U: %1 V").arg(m_Voltage).toLocal8Bit());
+
             if (calibrator->setValue(m_Voltage)){
                this->setIncValue();
                 QThread::msleep(m_timeOut);
@@ -64,7 +64,7 @@ void Verification_U_DC_AC::startVerification(Calibrator * calibrator, Voltmeter 
 
             Counter++;
              m_pprd->setLabelText(tr("Set DC -U: %1 V").arg(m_Voltage));
-             emit signalToConsole(tr("Set DC -U: %1 V").arg(m_Voltage).toLocal8Bit());
+
             if (calibrator->setValue(-m_Voltage)){
                this->setIncValue();
                 QThread::msleep(m_timeOut);
@@ -75,7 +75,7 @@ void Verification_U_DC_AC::startVerification(Calibrator * calibrator, Voltmeter 
 
             Counter++;
             m_pprd->setLabelText(tr("Set AC U: %1 V F: 1kHz").arg(m_Voltage));
-            emit signalToConsole(tr("Set AC U: %1 V F: 1kHz").arg(m_Voltage).toLocal8Bit());
+
             if (calibrator->setFreqValue(m_Voltage,1)){
                this->setIncValue();
                 QThread::msleep(m_timeOut);
@@ -95,7 +95,7 @@ void Verification_U_DC_AC::startVerification(Calibrator * calibrator, Voltmeter 
 
 
             delete m_pprd;
-            emit rezultSave(m_rezult);
+            this->saveRezult();
 
         }
     }
@@ -150,7 +150,7 @@ void Verification_U_DC_AC::calculation(uint iteration)
     float RezultDelta = deltaVer - deltaRef;
     qDebug() << "Промежуточный результат Итерации " << iteration <<" " << RezultDelta;
     m_arrForRezultForEachIteration[iteration] = RezultDelta;
-    emit signalToConsole(tr("       Difference precision for iteration %1 = %2").arg(iteration).arg(RezultDelta).toLocal8Bit());
+
 }
 
 
@@ -185,11 +185,10 @@ void Verification_U_AC_AC::startVerification(Calibrator * calibrator, Voltmeter 
 
         for (uint i = 0; i < m_numberMeasurements; ++i) {
 
-            emit signalToConsole(tr("Verification - iteration %1").arg(i).toLocal8Bit());
 
             uint Counter = 0;
             m_pprd->setLabelText(tr("Set AC U: %1 V F: %2 kHz").arg(m_Voltage).arg(m_Frequency));
-            emit signalToConsole(tr("Set AC U: %1 V F: %2 kHz").arg(m_Voltage).arg(m_Frequency).toLocal8Bit());
+
             if (calibrator->setFreqValue(m_Voltage,m_Frequency)){
                this->setIncValue();
                 QThread::msleep(m_timeOut);
@@ -201,7 +200,7 @@ void Verification_U_AC_AC::startVerification(Calibrator * calibrator, Voltmeter 
 
             Counter++;
             m_pprd->setLabelText(tr("Set AC U: %1 V F: 1 kHz").arg(m_Voltage));
-            emit signalToConsole(tr("Set AC U: %1 V F: 1 kHz").arg(m_Voltage).toLocal8Bit());
+
             if (calibrator->setFreqValue(m_Voltage,1)){
                this->setIncValue();
                 QThread::msleep(m_timeOut);
@@ -214,7 +213,7 @@ void Verification_U_AC_AC::startVerification(Calibrator * calibrator, Voltmeter 
 
             Counter++;
             m_pprd->setLabelText(tr("Set AC U: %1 V F: %2 kHz").arg(m_Voltage).arg(m_Frequency));
-            emit signalToConsole(tr("Set AC U: %1 V F: %2 kHz").arg(m_Voltage).arg(m_Frequency).toLocal8Bit());
+
             if (calibrator->setFreqValue(m_Voltage,m_Frequency)){
                this->setIncValue();
                 QThread::msleep(m_timeOut);
@@ -234,6 +233,8 @@ void Verification_U_AC_AC::startVerification(Calibrator * calibrator, Voltmeter 
 
 
     delete m_pprd;
+
+    this->saveRezult();
 
         }
     }
@@ -299,7 +300,7 @@ void Verification_U_AC_AC::calculation(uint iteration)
     float RezultDelta = deltaVer - deltaRef;
     qDebug() << "Промежуточный результат Итерации " << iteration <<" " << RezultDelta;
     m_arrForRezultForEachIteration[iteration] = RezultDelta;
-    emit signalToConsole(tr("       Difference precision for iteration %1 = %2").arg(iteration).arg(RezultDelta).toLocal8Bit());
+
 }
 
 
@@ -314,13 +315,19 @@ void Verification::calculationRezult()
         m_rezult = Summ/m_numberMeasurements + m_correctRef;
         qDebug() << "Результат Поверки: " << m_rezult;
 
-        emit signalToConsole(tr("           Verification result: %1").arg(m_rezult).toLocal8Bit());
+
 }
 
 void Verification::setIncValue()
 {
     ++Count;
     m_pprd->setValue(Count);
+}
+
+void Verification::saveRezult()
+{
+    Data* pData = Data::getData();
+    pData->addRezult(m_rezult);
 }
 
 
@@ -377,19 +384,21 @@ void Verification::receiversMeasurement(Voltmeter * voltmeter, int iteration, ui
 
     m_pprd->setLabelText(tr("receive data CH1"));
     float val1 = voltmeter->receiveValue(1);
-    if(val1 == 0) return;
+
+    qDebug()<< "Channel 1: " << val1;
     m_arrForMeasurement[0][iteration][counter] = val1;
     this->setIncValue();
-    emit signalToConsole((tr("  Value from reference converter: ") + QString::number(val1)).toLocal8Bit());
+
 
    QThread::msleep(m_timeOut);
 
     m_pprd->setLabelText(tr("receive data CH2"));
     float val2 = voltmeter->receiveValue(2);
-    if(val2 == 0) return;
+
+    qDebug()<< "Channel 2: " << val2;
     m_arrForMeasurement[1][iteration][counter] = val2;
     this->setIncValue();
-    emit signalToConsole((tr("  Value from verification converter: ") + QString::number(val1)).toLocal8Bit());
+
 }
 
 void Verification_U::setVoltage(float volt)

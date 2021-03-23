@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "verification.h"
+#include "data.h"
+
 
 namespace Ui {
 class Calibration;
@@ -19,11 +21,7 @@ signals:
     void setCalibration(const Verification* m_calibration);
     void signalStartCalibration();
     void signalForConsole(const QByteArray&);
-    void showConsole();
-    void saveRezult(float);
-    void signalSetTypeVer(int);
-    void signalSetVolt(float);
-    void signalPrint();
+
 
 public:
     explicit Calibration(QWidget *parent = nullptr);

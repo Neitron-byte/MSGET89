@@ -12,6 +12,7 @@
 #include "controller.h"
 #include "calibration.h"
 #include "console.h"
+#include "data.h"
 
 
 class Console;
@@ -27,9 +28,6 @@ private slots:
 
     void on_action_Connecting_triggered();
     void on_actionNew_triggered();
-    void showConsole();
-
-
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -65,6 +63,10 @@ private:
 
     //Консоль вывода
     Console* m_console = nullptr;
+
+    //Данные
+    Data* pData;
+
 
 
 };

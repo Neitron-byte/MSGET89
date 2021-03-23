@@ -31,7 +31,6 @@ void Calibration::setLenght()
    ui->doubleSpinBox_correct->setDecimals(5);
    ui->doubleSpinBox_correct->setSingleStep(0.00001);
 
-
 }
 
 void Calibration::setParametersCalibration()
@@ -62,7 +61,9 @@ void Calibration::setParametersCalibration()
             m_calibration->setTypeCalib(1);
         }
 
-
+        Data* pData = Data::getData();
+        pData->setVoltage(ui->doubleSpinBox_voltage->value());
+        pData->setFrequency(ui->spinBox_freq->value());
 
     }
 }
@@ -77,10 +78,6 @@ Calibration::Calibration(QWidget *parent) :
     this->addItem();
 
     this->setLenght();
-
-
-
-
 
 }
 
@@ -115,8 +112,6 @@ void Calibration::on_comboBox_calibration_Dev_2_currentIndexChanged(int index)
 
     }
     if (index){
-        connect(m_calibration,SIGNAL(signalToConsole(QByteArray)),SIGNAL(signalForConsole(QByteArray)));
-        connect(m_calibration,SIGNAL(rezultSave(float)),SIGNAL(saveRezult(float)));
 
     emit setCalibration(m_calibration);
     }
@@ -126,15 +121,13 @@ void Calibration::on_comboBox_calibration_Dev_2_currentIndexChanged(int index)
 void Calibration::on_pushButton_start_calibration_2_clicked()
 {
     if(ui->comboBox_calibration_Dev_2->currentIndex()){
-    emit signalSetTypeVer(ui->spinBox_freq->value());
     this->setParametersCalibration();
-    emit showConsole();
     emit signalStartCalibration();
     }
 }
 
 void Calibration::on_pushButton_print_clicked()
 {
-    emit signalSetVolt(ui->doubleSpinBox_voltage->value());
-    emit signalPrint();
+    Data* pData = Data::getData();
+    pData->print();
 }
