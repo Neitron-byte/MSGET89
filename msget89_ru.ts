@@ -34,29 +34,34 @@
         <translation>Погрешность эталонного П</translation>
     </message>
     <message>
-        <location filename="calibration.ui" line="102"/>
+        <location filename="calibration.ui" line="59"/>
+        <source>Frequency, kHz</source>
+        <translation>Частота, кГц</translation>
+    </message>
+    <message>
+        <location filename="calibration.ui" line="119"/>
         <source>Type ref converter</source>
         <translation>Тип эталонного П</translation>
     </message>
     <message>
-        <location filename="calibration.ui" line="110"/>
-        <location filename="calibration.ui" line="187"/>
+        <location filename="calibration.ui" line="127"/>
+        <location filename="calibration.ui" line="204"/>
         <source>with line function</source>
         <translation>с лин. функцией</translation>
     </message>
     <message>
-        <location filename="calibration.ui" line="117"/>
-        <location filename="calibration.ui" line="194"/>
+        <location filename="calibration.ui" line="134"/>
+        <location filename="calibration.ui" line="211"/>
         <source>with squa function</source>
         <translation>с квадр. функц.</translation>
     </message>
     <message>
-        <location filename="calibration.ui" line="179"/>
+        <location filename="calibration.ui" line="196"/>
         <source>Type calibration converter </source>
         <translation>Тип поверяемого П</translation>
     </message>
     <message>
-        <location filename="calibration.ui" line="260"/>
+        <location filename="calibration.ui" line="277"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -65,7 +70,12 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="calibration.ui" line="298"/>
+        <location filename="calibration.ui" line="296"/>
+        <source>Print</source>
+        <translation>Сформировать отчёт</translation>
+    </message>
+    <message>
+        <location filename="calibration.ui" line="328"/>
         <source>Start calibration</source>
         <translation>Запуск поверки</translation>
     </message>
@@ -88,14 +98,71 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ComInterface</name>
     <message>
-        <location filename="Device/cominterface.cpp" line="29"/>
+        <location filename="Device/cominterface.cpp" line="30"/>
         <source>Connected to %1 : %2, %3, %4, %5, %6</source>
         <translation>Подключено к %1 : %2, %3, %4, %5, %6</translation>
     </message>
     <message>
-        <location filename="Device/cominterface.cpp" line="34"/>
+        <location filename="Device/cominterface.cpp" line="35"/>
         <source>Error connecting to %1</source>
         <translation>Ошибка подключения к %1</translation>
+    </message>
+</context>
+<context>
+    <name>Data</name>
+    <message>
+        <location filename="data.cpp" line="13"/>
+        <source>Protocol verification</source>
+        <translation>Протокол поверки</translation>
+    </message>
+    <message>
+        <location filename="data.cpp" line="27"/>
+        <source>Time: </source>
+        <translation>Время:</translation>
+    </message>
+    <message>
+        <location filename="data.cpp" line="40"/>
+        <source>Date: </source>
+        <translation>Дата:</translation>
+    </message>
+    <message>
+        <location filename="data.cpp" line="47"/>
+        <source>Temperature: </source>
+        <translation>Температура:</translation>
+    </message>
+    <message>
+        <location filename="data.cpp" line="52"/>
+        <source>Full name: </source>
+        <translation>ФИО поверителя:</translation>
+    </message>
+    <message>
+        <location filename="data.cpp" line="57"/>
+        <source>Model: </source>
+        <translation>Модель преобразователя:</translation>
+    </message>
+    <message>
+        <location filename="data.cpp" line="62"/>
+        <source>Serial number: </source>
+        <translation>Серийный номер:</translation>
+    </message>
+    <message>
+        <location filename="data.cpp" line="67"/>
+        <source>Company: </source>
+        <translation>Компания:</translation>
+    </message>
+    <message>
+        <location filename="data.cpp" line="78"/>
+        <source>DC-AC: </source>
+        <translation>Погрешность при переходе от напряжения постоянного тока к напряжению переменного тока частотой 1 кГц: </translation>
+    </message>
+    <message>
+        <location filename="data.cpp" line="80"/>
+        <source>AC-AC: %1 kHz</source>
+        <translation>Погрешность компарирования напряжения при частоте %1 кГц: </translation>
+    </message>
+    <message>
+        <source>AC-AC: </source>
+        <translation type="vanished">Погрешность компарирования напряжения при частотах, отличной от частоты 1 кГц: </translation>
     </message>
 </context>
 <context>
@@ -270,27 +337,32 @@ p, li { white-space: pre-wrap; }
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="78"/>
+        <location filename="mainwindow.ui" line="82"/>
         <source>&amp;Device</source>
         <translation>Оборудование</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="13"/>
         <source>Software MS-GET89</source>
-        <translation>Программное обеспечение для ГЭТ89-2008</translation>
+        <translation>Программное обеспечение для ГЭТ89</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="73"/>
+        <location filename="mainwindow.cpp" line="82"/>
         <source>Data</source>
         <translation>Данные</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="78"/>
+        <location filename="mainwindow.cpp" line="91"/>
         <source>Calibration</source>
         <translation>Поверка</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="81"/>
+        <location filename="mainwindow.cpp" line="95"/>
+        <source>Console</source>
+        <translation>Просмотр</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="102"/>
         <source>Database</source>
         <translation>База данных</translation>
     </message>
@@ -298,43 +370,83 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Verification</name>
     <message>
-        <location filename="verification.cpp" line="231"/>
+        <location filename="verification.cpp" line="385"/>
         <source>receive data CH1</source>
         <translation>Получение значений с эталонного преобразователя</translation>
     </message>
     <message>
-        <location filename="verification.cpp" line="239"/>
+        <location filename="verification.cpp" line="395"/>
         <source>receive data CH2</source>
         <translation>Получение значений с поверяемого преобразователя</translation>
     </message>
 </context>
 <context>
-    <name>Verification_U_DC_AC</name>
+    <name>Verification_U_AC_AC</name>
     <message>
-        <location filename="verification.cpp" line="62"/>
-        <source>Start calibration</source>
-        <translation>Запуск поверки</translation>
+        <location filename="verification.cpp" line="179"/>
+        <source>Start calibration AC-AC</source>
+        <translation>Запуск частотной поверки</translation>
     </message>
     <message>
-        <location filename="verification.cpp" line="65"/>
+        <location filename="verification.cpp" line="182"/>
         <source>Calibration progress</source>
         <translation>Ход поверки</translation>
     </message>
     <message>
-        <location filename="verification.cpp" line="73"/>
-        <location filename="verification.cpp" line="103"/>
+        <location filename="verification.cpp" line="190"/>
+        <location filename="verification.cpp" line="215"/>
+        <source>Set AC U: %1 V F: %2 kHz</source>
+        <translation>Установка переменного напр. %1 В частотой %2 кГц</translation>
+    </message>
+    <message>
+        <location filename="verification.cpp" line="202"/>
+        <source>Set AC U: %1 V F: 1 kHz</source>
+        <translation>Установка переменного напр. %1 В частотой 1 кГц</translation>
+    </message>
+</context>
+<context>
+    <name>Verification_U_DC_AC</name>
+    <message>
+        <source>Start calibration</source>
+        <translation type="vanished">Запуск поверки</translation>
+    </message>
+    <message>
+        <location filename="verification.cpp" line="27"/>
+        <source>Start calibration DC-AC</source>
+        <translation>Запуск поверки перехода от напр. пост. тока к пер. напр. частотой 1 кГц</translation>
+    </message>
+    <message>
+        <location filename="verification.cpp" line="30"/>
+        <source>Calibration progress</source>
+        <translation>Ход поверки</translation>
+    </message>
+    <message>
+        <location filename="verification.cpp" line="40"/>
+        <location filename="verification.cpp" line="77"/>
+        <source>Set AC U: %1 V F: 1kHz</source>
+        <translation>Установка переменного напр. %1 В частотой 1 кГц</translation>
+    </message>
+    <message>
+        <location filename="verification.cpp" line="54"/>
+        <source>Set DC +U: %1 V</source>
+        <translation>Установка постоянного напр. пол. полярности %1 В</translation>
+    </message>
+    <message>
+        <location filename="verification.cpp" line="66"/>
+        <source>Set DC -U: %1 V</source>
+        <translation>Установка постоянного напр.отр. полярности %1 В</translation>
+    </message>
+    <message>
         <source>Set DC U: %1 F: 1kHz</source>
-        <translation>Установка переменного напряжения: %1 частотой: 1кГц</translation>
+        <translation type="vanished">Установка переменного напряжения: %1 частотой: 1кГц</translation>
     </message>
     <message>
-        <location filename="verification.cpp" line="83"/>
         <source>Set DC U: %1</source>
-        <translation>Установка постоянного напряжения пол. полярнойсти: %1</translation>
+        <translation type="vanished">Установка постоянного напряжения пол. полярнойсти: %1</translation>
     </message>
     <message>
-        <location filename="verification.cpp" line="93"/>
         <source>Set DC -U: %1</source>
-        <translation>Установка пост. напряжения отр. полярности: %1</translation>
+        <translation type="vanished">Установка пост. напряжения отр. полярности: %1</translation>
     </message>
 </context>
 <context>

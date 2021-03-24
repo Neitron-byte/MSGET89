@@ -93,7 +93,8 @@ void MainWindow::on_actionNew_triggered()
     //вкладка вывода на консоль
     m_console = new Console();
     m_tabWidget->addTab(m_console,tr("Console"));
-
+    Data* pData = Data::getData();
+    pData->setConsole(m_console);
     //вывод значений
     connect(m_calibration,SIGNAL(signalForConsole(QByteArray)),m_console,SLOT(putData(QByteArray)));
 

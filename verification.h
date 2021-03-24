@@ -14,6 +14,7 @@
 #include <QMessageBox>
 #include <iostream>
 #include "data.h"
+#include "console.h"
 
 
 

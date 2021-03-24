@@ -59,14 +59,21 @@ Console::Console(QWidget *parent) :
     document()->setMaximumBlockCount(100);
 
     QPalette p = palette();
-    p.setColor(QPalette::Base, Qt::black);
-    p.setColor(QPalette::Text, Qt::green);
+    p.setColor(QPalette::Base, Qt::white);
+    p.setColor(QPalette::Text, Qt::black);
     setPalette(p);
+
+    QFont serifFont("Courier New", 12, QFont::Bold);
+
+    this->setFont(serifFont);
+
 }
 
 void Console::putData(const QByteArray &data)
 {
-    appendPlainText(data);
+    QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
+
+   appendPlainText(codec->toUnicode(data));
 
     QScrollBar *bar = verticalScrollBar();
     bar->setValue(bar->maximum());

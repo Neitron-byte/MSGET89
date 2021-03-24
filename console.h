@@ -53,6 +53,9 @@
 #define CONSOLE_H
 
 #include <QPlainTextEdit>
+#include <QTextStream>
+#include <QFont>
+#include <QTextCodec>
 
 class Console : public QPlainTextEdit
 {

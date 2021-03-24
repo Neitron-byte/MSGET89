@@ -8,9 +8,9 @@ void mainData::SetLenght()
     ui->doubleSpinBox_temp->setMaximum(40);
     ui->doubleSpinBox_temp->setSingleStep(0.1);
 
-    ui->lineEdit_full_Name->setMaxLength(10);
-    ui->lineEdit_Model_Ver_Device->setMaxLength(5);
-    ui->lineEdit_serialNum_Dev->setMaxLength(5);
+    ui->lineEdit_full_Name->setMaxLength(50);
+    ui->lineEdit_Model_Ver_Device->setMaxLength(10);
+    ui->lineEdit_serialNum_Dev->setMaxLength(15);
     ui->lineEdit_company->setMaxLength(10);
 
 }
